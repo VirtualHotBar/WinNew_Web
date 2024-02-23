@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [react()],
   root: 'input/',
   build: {
-
+    outDir: '../dist',
     rollupOptions: {
       // 多页面入口
       input: pages,
