@@ -27,8 +27,8 @@ import '../global/main.css'
 const { Header, Content, Footer } = Layout;
 
 const Home = () => <h2>首页</h2>;
-const About = () => <h2>关于我们</h2>;
-const Users = () => <h2>用户列表</h2>;
+const About = () => <h2>关于</h2>;
+const Users = () => <h2></h2>;
 const NoMatch = () => <h2>404 Not Found</h2>;
 
 
@@ -54,6 +54,7 @@ export function Layout_() {
           <div style={{ width: '100%' }}></div>
           <MenuItem >
             <Link to="/">首页</Link>
+            <input type="checkbox" />
           </MenuItem>
           <MenuItem  >
             <Link to="/donation">捐赠</Link>
