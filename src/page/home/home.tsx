@@ -52,7 +52,7 @@ export function Home() {
 
       <div style={{ textAlign: 'center' }}>
         <br />
-        <img src="../../../public/favicon.ico" width={'105px'} />
+        <img src="/favicon.ico" width={'105px'} />
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.0rem', marginTop: '0.8rem' }}>WinNew</h1>
         <span style={{ color: 'var(--td-text-color-placeholder)', fontSize: '1.1rem' }}>获取最新的Windows镜像</span>
       </div>
