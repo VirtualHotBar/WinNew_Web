@@ -1,0 +1,65 @@
+.class-link {
+    color: #2DBAE8;
+    text-decoration: none !important;
+    transition: opacity 0.1s ease;
+}
+
+.class-link:hover {
+    opacity: 0.8;
+    text-decoration: none !important;
+}
+
+.class-link:visited {
+    text-decoration: none !important;
+}
+
+.class-link:active {
+    text-decoration: none !important;
+}
+
+.class-link[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+
+
+
+.donation-table {
+    margin: 0 auto;
+    /* 表格居中 */
+    width: 80%;
+    /* 根据你的需要调整宽度 */
+    border-collapse: collapse;
+    /* 去掉表格之间的间隔 */
+}
+
+.donation-table th,
+.donation-table td {
+    border: 1px solid #ddd;
+    /* 单元格边框线 */
+    padding: 8px 12px;
+    /* 单元格内边距 */
+}
+
+.donation-table thead {
+    background-color: #f0f0f0;
+    /* 表头背景色 */
+}
+
+.donation-table thead th {
+    font-weight: normal;
+    /* 表头字体不加粗 */
+    color: #333;
+    /* 表头字体颜色 */
+}
+
+.donation-table img {
+    width: 230px;
+    /* 图片宽度 */
+    height: auto;
+    /* 图片高度自适应 */
+    margin: 10px 0;
+    /* 图片上下外边距 */
+}
