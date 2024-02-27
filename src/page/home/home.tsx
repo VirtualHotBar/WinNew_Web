@@ -34,6 +34,9 @@ export function Home() {
 
   useEffect(() => {
 
+      document.title = 'WinNew - 捐赠';
+
+
     async function fetchData() {
       const latestInfos11 = await fetchLatestWinInfos('11');
       const latestInfos10 = await fetchLatestWinInfos('10');

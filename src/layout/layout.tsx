@@ -22,6 +22,36 @@ import { FooterContent } from '../layout/footer';
 
 const { Header, Content, Footer } = Layout;
 
+interface Routers{
+  title: string;
+  path: string;
+  component: JSX.Element;
+}
+
+
+
+const routers:Array<Routers> = [
+  {
+    title: 'WinNew - 获取Winows最新版本',
+    path: '/',
+    component: <Home />,
+  },  {
+    title: 'WinNew - 捐赠',
+    path: '/donation',
+    component: <Donation />,
+  },  {
+    title: 'WinNew - 关于',
+    path: '/about',
+    component:<About />,
+  },
+]
+
+// 封装一层 专门负责显示页面标题
+const DomTitle = ({item}: { item: Routers }) => {
+  document.title = item.title;
+  return item.component 
+}
+
 export function Layout_() {
 
 
@@ -51,6 +81,7 @@ export function Layout_() {
           }}
         >
           <div style={{ width: '100%' }}></div>
+
           <MenuItem  >
             <Link to="/">首页</Link>
           </MenuItem>
@@ -65,10 +96,13 @@ export function Layout_() {
           <div style={
             contentWrapperStyle
           }>
+
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/donation" element={<Donation />} />
-              <Route path="/about" element={<About />} />
+            {
+              routers.map((item) => {
+                return <Route path={item.path} key={item.path} element={<DomTitle item={item} />} />
+              })
+            }
             </Routes>
           </div>
 
