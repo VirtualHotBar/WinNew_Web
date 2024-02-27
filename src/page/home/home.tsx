@@ -17,7 +17,7 @@ async function fetchLatestWinInfos(systemCode: string): Promise<LatestInfo[]> {
   const response = await fetch('https://api.hotpe.top/API/Microsoft/Windows/getFileList.php?SystemCode=' + systemCode);
   const data = await response.json();
   return data.map((item: any) => ({
-    title: 'Windows',
+    title: 'Windows '+systemCode,
     version: item.VerCode,
     buildCode: item.BuildVer,
     date: item.PushTime,
