@@ -33,10 +33,6 @@ export function Home() {
   const [latestWinInfos, setLatestWinInfos] = useState(Array<LatestInfo>);
 
   useEffect(() => {
-
-      document.title = 'WinNew - 捐赠';
-
-
     async function fetchData() {
       const latestInfos11 = await fetchLatestWinInfos('11');
       const latestInfos10 = await fetchLatestWinInfos('10');

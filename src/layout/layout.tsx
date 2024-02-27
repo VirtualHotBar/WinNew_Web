@@ -10,7 +10,8 @@ import {
   Routes, // 替代了Switch
   Route,
   Link,
-  useNavigate
+  useNavigate,
+  useLocation
 } from "react-router-dom";
 
 import '../global/main.css'
@@ -22,7 +23,8 @@ import { FooterContent } from '../layout/footer';
 
 const { Header, Content, Footer } = Layout;
 
-interface Routers{
+interface Routers {
+  word: string;
   title: string;
   path: string;
   component: JSX.Element;
@@ -30,27 +32,25 @@ interface Routers{
 
 
 
-const routers:Array<Routers> = [
+const routers: Array<Routers> = [
   {
+    word: '首页',
     title: 'WinNew - 获取Winows最新版本',
     path: '/',
     component: <Home />,
-  },  {
+  }, {
+    word: '捐赠',
     title: 'WinNew - 捐赠',
     path: '/donation',
     component: <Donation />,
-  },  {
+  }, {
+    word: '关于',
     title: 'WinNew - 关于',
     path: '/about',
-    component:<About />,
+    component: <About />,
   },
 ]
 
-// 封装一层 专门负责显示页面标题
-const DomTitle = ({item}: { item: Routers }) => {
-  document.title = item.title;
-  return item.component 
-}
 
 export function Layout_() {
 
@@ -81,41 +81,53 @@ export function Layout_() {
           }}
         >
           <div style={{ width: '100%' }}></div>
-
-          <MenuItem  >
-            <Link to="/">首页</Link>
-          </MenuItem>
-          <MenuItem  >
-            <Link to="/donation">捐赠</Link>
-          </MenuItem>
-          <MenuItem  >
-            <Link to="/about">关于</Link>
-          </MenuItem>
+          {routers.map((item) => (
+            <MenuItem key={item.path}>
+              <Link to={item.path}>{item.word}</Link>
+            </MenuItem>
+          ))}
         </HeadMenu></Header>
         <Content style={{ padding: '10px', marginTop: '4px' }}>
           <div style={
             contentWrapperStyle
           }>
 
-            <Routes>
-            {
-              routers.map((item) => {
-                return <Route path={item.path} key={item.path} element={<DomTitle item={item} />} />
-              })
-            }
-            </Routes>
+            <PageRouter></PageRouter>
+
           </div>
 
         </Content>
 
 
         <Footer style={{ width: '100%', background: 'var(--td-bg-color-page)', textAlign: 'center' }}>
-        <FooterContent></FooterContent>
+          <FooterContent></FooterContent>
         </Footer>
 
       </Layout>
     </Router>
 
 
+  )
+}
+
+function PageRouter() {
+  const location = useLocation();
+
+  useEffect(() => {
+    routers.forEach((item) => {
+      if (location.pathname === item.path) {
+        document.title = item.title;
+      }
+    });
+  }, [location]);
+
+  return (
+    <Routes>
+      {
+        routers.map((item) => {
+          return <Route path={item.path} key={item.path} element={item.component} />
+        })
+      }
+    </Routes>
   )
 }
