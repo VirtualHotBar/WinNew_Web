@@ -10,7 +10,8 @@ export function Donation() {
 
     <div className='donation-container' style={{
       textAlign: 'center',
-      marginTop: '5rem'
+      marginTop: '5rem',
+      marginBottom:'7rem'
     }}>
 
       <h1 ><strong>捐赠VirtualHotBar</strong></h1>

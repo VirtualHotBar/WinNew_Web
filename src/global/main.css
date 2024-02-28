@@ -1,3 +1,7 @@
+html {
+    background-color: var(--td-bg-color-container);
+}
+
 .class-link {
     color: #2DBAE8;
     text-decoration: none !important;
@@ -23,43 +27,42 @@
 }
 
 
-
-
-
 .donation-table {
     margin: 0 auto;
-    /* 表格居中 */
-    width: 80%;
-    /* 根据你的需要调整宽度 */
+    /* 表格居中显示 */
+    width: 100%;
+    /* 表格宽度设置为父容器的100%，实现自适应 */
+    max-width: 800px;
+    /* 可设定一个最大宽度以保证在大屏幕上也不会过大 */
     border-collapse: collapse;
-    /* 去掉表格之间的间隔 */
+    /* 去除表格间隔 */
 }
 
 .donation-table th,
 .donation-table td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--td-bg-color-page);
     /* 单元格边框线 */
     padding: 8px 12px;
     /* 单元格内边距 */
+    text-align: center;
+    /* 可选：使表头和内容居中对齐 */
 }
 
 .donation-table thead {
-    background-color: #f0f0f0;
+    background-color: var(--td-bg-color-page);
     /* 表头背景色 */
 }
 
 .donation-table thead th {
     font-weight: normal;
     /* 表头字体不加粗 */
-    color: #333;
+    color: var(--td-text-color-primary);
     /* 表头字体颜色 */
+    text-align: center;
+    /* 可选：使表头文字居中对齐 */
 }
 
 .donation-table img {
-    width: 230px;
-    /* 图片宽度 */
-    height: auto;
-    /* 图片高度自适应 */
-    margin: 10px 0;
-    /* 图片上下外边距 */
+    max-width: 100%;
+    /* 图片宽度设为100%，实现自适应 */
 }

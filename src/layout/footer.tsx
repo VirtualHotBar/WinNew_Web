@@ -8,7 +8,7 @@ export const FooterContent = () => {
                 <a href="/QQGroup/" target="_blank" className="class-link" rel="noopener">   加入官方Q群</a>
             </p> */}
 
-            <div style={{ width: "90%", margin: "0 auto" }}>
+            <div style={{ maxWidth: "90%", margin: "0 auto" }}>
                 <p ><strong>友 情 链 接</strong></p>
                 <p >
                     <a href="https://blog.hotpe.top/" target="_blank" className="class-link" rel="noopener" >VirtualHotBar</a> |

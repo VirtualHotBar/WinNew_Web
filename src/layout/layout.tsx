@@ -35,7 +35,7 @@ interface Routers {
 const routers: Array<Routers> = [
   {
     word: '首页',
-    title: 'WinNew - 获取Winows最新版本',
+    title: 'WinNew - 从微软服务器获取最新的Windows镜像',
     path: '/',
     component: <Home />,
   }, {
@@ -99,7 +99,7 @@ export function Layout_() {
         </Content>
 
 
-        <Footer style={{ width: '100%', background: 'var(--td-bg-color-page)', textAlign: 'center' }}>
+        <Footer style={{  background: 'var(--td-bg-color-page)', textAlign: 'center' }}>
           <FooterContent></FooterContent>
         </Footer>
 
