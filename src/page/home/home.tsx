@@ -45,7 +45,7 @@ export function Home() {
         <br />
         <img src="/favicon.ico" width={'105px'} />
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.0rem', marginTop: '0.8rem' }}>WinNew</h1>
-        <span style={{ color: 'var(--td-text-color-placeholder)', fontSize: '1.1rem' }}>从微软服务器获取最新的Windows镜像</span>
+        <span style={{ color: 'var(--td-text-color-placeholder)', fontSize: '1.1rem' }}>从微软服务器获取最新的原版Windows镜像</span>
       </div>
       <Divider style={{ marginTop: '2.5rem' }} />
       <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>

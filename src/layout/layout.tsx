@@ -35,7 +35,7 @@ interface Routers {
 const routers: Array<Routers> = [
   {
     word: '首页',
-    title: 'WinNew - 从微软服务器获取最新的Windows镜像',
+    title: 'WinNew - 从微软服务器获取最新的原版Windows镜像',
     path: '/',
     component: <Home />,
   }, {
