@@ -1,8 +1,3 @@
 User-agent: *
 
 Allow: /
-Allow: /donation/
-Allow: /download/
-
-Sitemap: https://www.hotpe.top/baidusitemap.xml
-Sitemap: https://www.hotpe.top/sitemap.xml
