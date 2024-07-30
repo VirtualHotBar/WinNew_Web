@@ -10,7 +10,7 @@ export function About() {
       <br />
       <br />
       
-      <p>实现：定时获取<a className="class-link" rel="noopener"  target="_blank" href="https://s0.hotpe.top/i/p/1/65dfe744a8a4f.png">Windows媒体创建工具(Media Creation Tool)</a>的系统列表，所以与微软官方提供的<a className="class-link" rel="noopener"  target="_blank" href="https://www.microsoft.com/zh-cn/software-download/windows11">Windows11</a>/<a className="class-link" rel="noopener"  target="_blank" href="https://www.microsoft.com/zh-cn/software-download/windows10">10</a>下载页面获取到的镜像版本保持同步。</p>
+      <p>实现：定时获取<a className="class-link" rel="noopener"  target="_blank" href="https://go.microsoft.com/fwlink/?linkid=2156295">Windows媒体创建工具(Media Creation Tool)</a>的系统列表，所以与微软官方提供的<a className="class-link" rel="noopener"  target="_blank" href="https://www.microsoft.com/zh-cn/software-download/windows11">Windows11</a>/<a className="class-link" rel="noopener"  target="_blank" href="https://www.microsoft.com/zh-cn/software-download/windows10">10</a>下载页面获取到的镜像版本保持同步。</p>
       </p>
 
     </div>

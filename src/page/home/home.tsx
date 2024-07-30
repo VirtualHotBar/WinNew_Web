@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Card, Col, Descriptions, Divider, MessagePlugin, Row, Select, Space, Tag } from 'tdesign-react';
+import { Avatar, Button, Card, Col, Collapse, Descriptions, Divider, Link, MessagePlugin, Row, Select, Space, Tag } from 'tdesign-react';
 import DescriptionsItem from 'tdesign-react/es/descriptions/DescriptionsItem';
 import { config } from '../../services/config';
 import { VersionsOption, WinFileInfo, EditionAndLanguage } from '../../type/home';
+import CollapsePanel from 'tdesign-react/es/collapse/CollapsePanel';
 
 async function fetchWinInfos(systemCode: string, version: string = '', languageCode: string = '', edition: string = ''): Promise<WinFileInfo[]> {
   let url = config.apiHost + '/API/WinNew/getFileList.php?SystemCode=' + systemCode
@@ -93,8 +94,58 @@ export function Home() {
           }
         </Row>
       </div>
-      <AllSystem></AllSystem>
-
+      <AllSystem />
+      <Divider style={{ marginTop: '3rem' }} />
+      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: '1.7rem' }}>补充</h2>
+        <Collapse
+          expandIcon
+          expandIconPlacement="left"
+          expandOnRowClick
+          style={{ marginBottom: '3rem', textAlign: 'left' }}
+        >
+          <CollapsePanel header="微软官方页面" >
+            <Link theme="primary" href='https://www.microsoft.com/zh-cn/software-download/windows11' target='_blank' >下载 Windows 11</Link>
+            <br />
+            <Link theme="primary" href='https://www.microsoft.com/zh-cn/software-download/windows10' target='_blank'>下载 Windows 10</Link>
+          </CollapsePanel>
+          <CollapsePanel header="第三方原版系统站点">
+          <Link theme="primary" href='https://down.hotpe.top/OS/' target='_blank' >站长搜集的原版系统</Link>
+            <br />
+            <Link theme="primary" href='https://next.itellyou.cn/' target='_blank' >MSDN, 我告诉你</Link>
+            <br />
+            <Link theme="primary" href='https://uupdump.net/?lang=zh-cn' target='_blank' >UUP dump</Link>
+            (<Link theme="primary" href='https://www.uupdump.cn/' target='_blank' >CN</Link>)
+            <br />
+            <Link theme="primary" href='https://hellowindows.cn/' target='_blank' >HelloWindows</Link>
+            <br />
+            <Link theme="primary" href='https://msdn.sjjzm.com/' target='_blank' >山己几子木</Link>
+            <br />
+            <Link theme="primary" href='https://www.xitongku.com/' target='_blank' >系统库</Link>
+            <br />
+            注：以上站点不保证可用性、安全性、质量，请自行判断。
+          </CollapsePanel>
+          <CollapsePanel header="第三方修改版系统站点">
+            <Link theme="primary" href='http://bbs.wuyou.net/forum.php?mod=forumdisplay&fid=90' target='_blank' >无忧启动</Link>
+            <br />
+            <Link theme="primary" href='https://www.puresys.net/%e7%b3%bb%e7%bb%9f%e4%b8%8b%e8%bd%bd' target='_blank' >Puresys</Link>
+            <br />
+            <Link theme="primary" href='https://www.newxitong.com/' target='_blank' >吻妻</Link>
+            <br />
+            <Link theme="primary" href='https://lvsexitong.com/' target='_blank' >绿色系统</Link>
+            <br />
+            <Link theme="primary" href='https://www.aichunjing.com/' target='_blank' >爱纯净</Link>
+            <br />
+            <Link theme="primary" href='https://www.winos.me/' target='_blank' >WINOS</Link>(下载需登录)
+            <br />
+            <Link theme="primary" href='https://www.pc528.net/' target='_blank' >不忘初心</Link>(下载需付费)
+            <br />
+            <Link theme="primary" href='https://yyczxt.com/' target='_blank' >又要重装</Link>(<Link theme="primary" href='https://www.ghxi.com/category/all/system' target='_blank' >by果核剥壳</Link>、有付费项)
+            <br />
+            注：以上站点不保证可用性、安全性、质量，请自行判断。
+          </CollapsePanel>
+        </Collapse>
+      </div>
     </div>
   );
 }
@@ -283,7 +334,7 @@ function AllSystem() {
           ></Select>
         </Space>
 
-        <div style={{ marginTop: '3rem' ,marginBottom: '8rem' }}>
+        <div style={{ marginTop: '3rem', marginBottom: '8rem' }}>
           {fileListContent}
         </div>
 
