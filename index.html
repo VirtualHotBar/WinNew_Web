@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="//p1.hotpe.top/i/p/1/66a91b7c805a2.png" />
+  <link rel="icon" type="image/svg+xml" href="//p1.hotpe.top/i/p/1/66a91b7c805a2.png" />
+  <link rel="apple-touch-icon" href="//p1.hotpe.top/i/p/1/66a91b7c805a2.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="author" content="VirtualHotBar">
@@ -17,6 +17,23 @@
   <meta property="og:description" content="获取最新的原版Windows镜像，从微软官方服务器下载，原汁原味无修改.">
   <meta property="og:locale" content="zh_CN">
   <meta property="article:author" content="VirtualHotBar">
+  
+  <title>WinNew - 从微软服务器获取最新的原版Windows镜像</title>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const cdnBasePath = '//p1.hotpe.top/gh/VirtualHotBar/WinNew_Web@dist';
+      const elements = document.querySelectorAll('script[src], link[href]');
+      
+      elements.forEach(function(el) {
+        let currentSrc = el.src || el.href;
+        if (currentSrc.includes('static/js/') || currentSrc.includes('static/css/')) {
+          el.src = el.src.replace('/static/js/', `${cdnBasePath}/static/js/`);
+          el.href = el.href.replace('/static/css/', `${cdnBasePath}/static/css/`);
+        }
+      });
+    });
+  </script>
 
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -29,7 +46,7 @@
   <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
   <script>LA.init({id:"KMXcXkix0m3qBlgg",ck:"KMXcXkix0m3qBlgg"})</script>
 
-  <title>WinNew - 从微软服务器获取最新的原版Windows镜像</title>
+  
 </head>
 
 <body style="margin:0;display:block;">
