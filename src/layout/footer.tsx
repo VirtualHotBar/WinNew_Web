@@ -14,7 +14,7 @@ export const FooterContent = () => {
                     <a href="https://blog.hotpe.top/" target="_blank" className="class-link" rel="noopener" >VirtualHotBar</a> |
                     <a href="https://www.hotpe.top/" target="_blank" className="class-link" rel="noopener" >HotPE工具箱</a> |
                     <a href="https://sysri.cn/" target="_blank" className="class-link" rel="noopener" > SysRi</a> |
-                    <a href="https://pic.hotpe.top/" target="_blank" className="class-link" rel="noopener" > HotPic</a> |
+                    <a href="https://www.netmount.cn/" target="_blank" className="class-link" rel="noopener" > NetMount</a> |
                     <a href="https://pan.hotpe.top/" target="_blank" className="class-link" rel="noopener" > HotPan</a> 
                     <br />
                 </p>
