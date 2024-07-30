@@ -2,6 +2,11 @@ name: Actions CI -  GitHub Actions Build and Deploy
 on:
   push:
     branches: [ main ]
+
+
+permissions:
+  contents: write
+  
 # 执行的一项或多项任务
 jobs:
   build-and-deploy:
