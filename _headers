@@ -1,0 +1,3 @@
+/*.*
+Cache-Control: public, max-age=86400, immutable
+Netlify-CDN-Cache-Control: public, max-age=86400, stale-while-revalidate=120
