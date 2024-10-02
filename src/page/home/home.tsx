@@ -117,6 +117,8 @@ export function Home() {
             <Link theme="primary" href='https://uupdump.net/?lang=zh-cn' target='_blank' >UUP dump</Link>
             (<Link theme="primary" href='https://www.uupdump.cn/' target='_blank' >CN</Link>)
             <br />
+            <Link theme="primary" href='https://massgrave.dev/genuine-installation-media' target='_blank' >MAS</Link>
+            <br />
             <Link theme="primary" href='https://hellowindows.cn/' target='_blank' >HelloWindows</Link>
             <br />
             <Link theme="primary" href='https://msdn.sjjzm.com/' target='_blank' >山己几子木</Link>
