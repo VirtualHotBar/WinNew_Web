@@ -10,8 +10,6 @@ permissions:
 # 执行的一项或多项任务
 jobs:
   build-and-deploy:
-    # 运行在虚拟机环境ubuntu-latest
-    # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on 
     runs-on: ubuntu-latest
     steps:
     - name: 获取源码  🛎️
@@ -19,15 +17,11 @@ jobs:
     - name: Node环境版本 🗜️
       uses: actions/setup-node@v3
       with:
-        node-version: 18
-    - name: 安装 Pnpm 🧬
-      uses: pnpm/action-setup@v2
-      id: pnpm-install
-      with:
-          version: 7
-          run_install: true
+        node-version: 24
     - name: 安装依赖 ⚙️
-      run: pnpm install
+      run: |
+        npm i pnpm -g
+        pnpm i
     - name: 打包 🏗️
       run: |
         npm run build
