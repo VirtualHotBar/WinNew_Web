@@ -218,7 +218,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
               files={filteredFiles}
               editionAndLanguage={editionAndLanguage}
               selectedLanguage={filters.language}
-              emptyContent={<strong>请选择上面的筛选选项</strong>}
+              emptyContent={<strong>请选择筛选选项</strong>}
               onDownload={onDownload}
               onCopy={onCopy}
             />

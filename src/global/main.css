@@ -6,7 +6,7 @@
   --app-primary: #0f6adf;
   --app-primary-soft: #eaf3ff;
   --app-border: #dbe4f2;
-  --app-shadow: 0 12px 36px rgba(18, 41, 79, 0.09);
+  --app-shadow: 0 6px 20px rgba(18, 41, 79, 0.05);
 }
 
 *,
@@ -90,7 +90,7 @@ p {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.83) 100%);
   border: 1px solid rgba(219, 228, 242, 0.7);
   border-radius: 20px;
-  box-shadow: var(--app-shadow);
+  box-shadow: var(--app-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .home-page {
@@ -132,9 +132,9 @@ p {
 
 .all-system-layout {
   display: grid;
-  grid-template-columns: minmax(280px, 34%) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
-  align-items: start;
+  align-items: center;
 }
 
 .all-system-left,
@@ -143,6 +143,7 @@ p {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.72);
   padding: 14px;
+  text-align: center;
 }
 
 .all-system-subtitle {
@@ -153,6 +154,13 @@ p {
 
 .all-system-left .selector-grid {
   grid-template-columns: 1fr;
+  width: min(420px, 100%);
+  margin: 0 auto;
+}
+
+.all-system-right .files-area {
+  width: min(740px, 100%);
+  margin: 0 auto;
 }
 
 .latest-grid {
