@@ -241,7 +241,7 @@ const ExternalLinksSection: React.FC = () => (
       expandOnRowClick
       style={{ marginBottom: '3rem', textAlign: 'left' }}
     >
-      <CollapsePanel header="微软官方页面">
+      <Collapse.Panel header="微软官方页面">
         {EXTERNAL_LINKS.official.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
@@ -250,9 +250,9 @@ const ExternalLinksSection: React.FC = () => (
             <br />
           </React.Fragment>
         ))}
-      </CollapsePanel>
+      </Collapse.Panel>
 
-      <CollapsePanel header="第三方原版系统站点">
+      <Collapse.Panel header="第三方原版系统站点">
         {EXTERNAL_LINKS.thirdPartyOriginal.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
@@ -270,9 +270,9 @@ const ExternalLinksSection: React.FC = () => (
           </React.Fragment>
         ))}
         <span>注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
-      </CollapsePanel>
+      </Collapse.Panel>
 
-      <CollapsePanel header="第三方修改版系统站点">
+      <Collapse.Panel header="第三方修改版系统站点">
         {EXTERNAL_LINKS.thirdPartyModified.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
@@ -283,7 +283,7 @@ const ExternalLinksSection: React.FC = () => (
           </React.Fragment>
         ))}
         <span>注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
-      </CollapsePanel>
+      </Collapse.Panel>
     </Collapse>
   </div>
 );

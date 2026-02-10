@@ -17,6 +17,9 @@ importers:
       react-router-dom:
         specifier: ^6.22.1
         version: 6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tdesign-icons-react:
+        specifier: ^0.6.2
+        version: 0.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tdesign-react:
         specifier: ^1.7.7
         version: 1.7.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -706,6 +709,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -1124,6 +1128,12 @@ packages:
 
   tdesign-icons-react@0.3.4:
     resolution: {integrity: sha512-y4QOyqZkkxn7B2HDRHEqOKqQaVzw1ODp9Apu0i7TbpsLnakFYxnQzeTgDYUR7rIzsPrkkzIBkOh8myA9RKrZCQ==}
+    peerDependencies:
+      react: '>=16.13.1'
+      react-dom: '>=16.13.1'
+
+  tdesign-icons-react@0.6.2:
+    resolution: {integrity: sha512-RBaGtgM58Doly/+4Le20scP6WrNCdC/5BRrnWjNfno3Lc/i7chaHItIu5Otuly4I7m0LbTFinQ4yt+0isGybAw==}
     peerDependencies:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
@@ -2271,6 +2281,13 @@ snapshots:
       has-flag: 4.0.0
 
   tdesign-icons-react@0.3.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@babel/runtime': 7.24.8
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  tdesign-icons-react@0.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.8
       classnames: 2.5.1

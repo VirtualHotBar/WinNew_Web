@@ -48,7 +48,6 @@ export class ErrorBoundary extends Component<Props, State> {
             theme="error"
             title="组件加载失败"
             message={this.state.error?.message || '未知错误'}
-            closeable={false}
           />
           <Button
             style={{ marginTop: '16px' }}

@@ -17,7 +17,7 @@ import { About } from '../page/about/about';
 import { FooterContent } from '../layout/footer';
 import type { RouterItem } from '../types/layout';
 import { useRouterSEO, type SEOConfig } from '../hooks/useSEO';
-import { pages } from './pages.config';
+import { pages } from '../pages.config';
 
 const { Header, Content, Footer } = Layout;
 const { HeadMenu, MenuItem } = Menu;

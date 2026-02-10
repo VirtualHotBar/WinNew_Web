@@ -50,23 +50,23 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
   const isEditionDisabled = !editionAndLanguage?.Edition.length || !version;
 
   // 处理系统代码变化
-  const handleSystemCodeChange = useCallback((value: string | number | undefined) => {
-    onSystemCodeChange(value?.toString() || '');
+  const handleSystemCodeChange = useCallback((value: unknown) => {
+    onSystemCodeChange(String(value || ''));
   }, [onSystemCodeChange]);
 
   // 处理版本变化
-  const handleVersionChange = useCallback((value: string | number | undefined) => {
-    onVersionChange(value?.toString() || '');
+  const handleVersionChange = useCallback((value: unknown) => {
+    onVersionChange(String(value || ''));
   }, [onVersionChange]);
 
   // 处理语言变化
-  const handleLanguageChange = useCallback((value: string | number | undefined) => {
-    onLanguageChange(value?.toString() || '');
+  const handleLanguageChange = useCallback((value: unknown) => {
+    onLanguageChange(String(value || ''));
   }, [onLanguageChange]);
 
   // 处理版本变化
-  const handleEditionChange = useCallback((value: string | number | undefined) => {
-    onEditionChange(value?.toString() || '');
+  const handleEditionChange = useCallback((value: unknown) => {
+    onEditionChange(String(value || ''));
   }, [onEditionChange]);
 
   return (
