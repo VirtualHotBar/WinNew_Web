@@ -193,6 +193,10 @@ p {
   box-shadow: 0 8px 24px rgba(17, 36, 66, 0.06);
 }
 
+.file-card .t-card__body {
+  text-align: center;
+}
+
 .file-card-top {
   text-align: center;
 }
@@ -204,6 +208,7 @@ p {
 .file-card-sha1 {
   margin-top: 10px;
   display: block;
+  text-align: center;
   color: var(--app-text-muted);
   word-break: break-all;
 }
