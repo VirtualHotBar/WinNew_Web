@@ -1,4 +1,4 @@
-/"**
+/**
  * SkeletonCard Component
  * 文件卡片骨架屏
  */

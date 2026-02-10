@@ -1,4 +1,4 @@
-/"**
+/**
  * Version Utilities
  * 版本号比较和排序工具
  */

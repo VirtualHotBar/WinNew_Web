@@ -1,4 +1,4 @@
-/"**
+/**
  * ErrorBoundary Component
  * 错误边界组件
  */

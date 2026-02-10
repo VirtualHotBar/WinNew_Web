@@ -1,4 +1,4 @@
-/"**
+/**
  * Format Utilities
  * 格式化工具函数
  */
