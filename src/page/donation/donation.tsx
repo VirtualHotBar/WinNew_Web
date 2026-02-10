@@ -1,48 +1,35 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 
 export function Donation() {
-  useEffect(() => {
-
-  }, [])
-
   return (
+    <section className="donation-page panel">
+      <h1><strong>捐赠 VirtualHotBar</strong></h1>
+      <p>
+        WinNew 为
+        <strong> 非盈利项目</strong>
+        。如果你觉得项目不错，请考虑捐赠，以维持项目持续维护。
+      </p>
 
-
-    <div className='donation-container' style={{
-      textAlign: 'center',
-      marginTop: '5rem',
-      marginBottom:'7rem'
-    }}>
-
-      <h1 ><strong>捐赠VirtualHotBar</strong></h1>
-      <br />
-
-      <p style={{fontSize: '1rem'}}>WinNew为<strong>非盈利项目</strong>。如果你觉得项目不错请考虑捐赠，以维持项目的持续维护。</p>
-      <br />
-
-      <h2>捐赠途径</h2>
-      <br />
-
-      <table className='donation-table'>
-        <thead>
-          <tr>
-            <th>微信支付</th>
-            <th>支付宝</th>
-            <th>QQ支付</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td ><img src="https://p1.hotpe.top/i/PicGo/202302031716843.jpg" /></td>
-            <td ><img src="https://p1.hotpe.top/i/PicGo/202302031715348.jpg" /></td>
-            <td ><img src="https://p1.hotpe.top/i/PicGo/202302031715361.jpg" /></td>
-          </tr>
-        </tbody>
-      </table>
-      <h3>感谢您捐赠VirtualHotBar！</h3>
-
-
-    </div>
-
-  )
+      <h2 style={{ marginTop: '20px' }}>捐赠途径</h2>
+      <div className="donation-table-wrap">
+        <table className="donation-table">
+          <thead>
+            <tr>
+              <th>微信支付</th>
+              <th>支付宝</th>
+              <th>QQ支付</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="https://p1.hotpe.top/i/PicGo/202302031716843.jpg" alt="微信收款码" /></td>
+              <td><img src="https://p1.hotpe.top/i/PicGo/202302031715348.jpg" alt="支付宝收款码" /></td>
+              <td><img src="https://p1.hotpe.top/i/PicGo/202302031715361.jpg" alt="QQ收款码" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 style={{ marginTop: '16px' }}>感谢你对 WinNew 的支持</h3>
+    </section>
+  );
 }

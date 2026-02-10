@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo, useCallback } from 'react';
-import { Select, Space, Loading } from 'tdesign-react';
+import { Select, Loading } from 'tdesign-react';
 import type { VersionsOption, EditionAndLanguage } from '../types/api';
 
 interface SystemSelectorProps {
@@ -71,7 +71,7 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
 
   return (
     <Loading loading={isLoadingOptions} size="small">
-      <Space>
+      <div className="selector-grid">
         <Select
           value={systemCode}
           prefixIcon={<>系统:</>}
@@ -107,7 +107,7 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
           clearable
           onChange={handleEditionChange}
         />
-      </Space>
+      </div>
     </Loading>
   );
 };

@@ -3,8 +3,8 @@
  * 优化后的首页组件
  */
 
-import React, { useEffect, useCallback, useState, useMemo } from 'react';
-import { Col, Collapse, Divider, Link, Row, Space } from 'tdesign-react';
+import React, { useEffect, useCallback, useState } from 'react';
+import { Collapse, Link, Space } from 'tdesign-react';
 
 import { FileCard } from '../../components/FileCard';
 import { FileList } from '../../components/FileList';
@@ -43,13 +43,12 @@ const EXTERNAL_LINKS = {
 
 // 页面标题组件
 const PageHeader: React.FC = () => (
-  <div style={{ textAlign: 'center' }}>
-    <br />
-    <img src="/favicon.ico" width="105px" alt="WinNew Logo" />
-    <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.0rem', marginTop: '0.8rem' }}>
+  <div className="page-hero panel">
+    <img src="/favicon.ico" width="96" alt="WinNew Logo" />
+    <h1>
       WinNew
     </h1>
-    <span style={{ color: 'var(--td-text-color-placeholder)', fontSize: '1.1rem' }}>
+    <span className="page-subtitle">
       从微软服务器获取最新的原版Windows镜像
     </span>
   </div>
@@ -80,21 +79,17 @@ const LatestSection: React.FC<LatestSectionProps> = ({
   }, []); // 空依赖数组，只执行一次
 
   return (
-    <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ fontSize: '1.7rem' }}>最新</h2>
+    <section className="panel section-panel">
+      <h2 className="section-title">最新</h2>
       {isLoading ? (
-        <Row gutter={16}>
-          <Col style={{ width: '50%' }}>
-            <SkeletonCard />
-          </Col>
-          <Col style={{ width: '50%' }}>
-            <SkeletonCard />
-          </Col>
-        </Row>
+        <div className="latest-grid">
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
       ) : (
-        <Row gutter={16}>
+        <div className="latest-grid">
           {latestFiles.map((info) => (
-            <Col style={{ width: '50%' }} key={`${info.SystemCode}-${info.BuildVer}`}>
+            <div key={`${info.SystemCode}-${info.BuildVer}`}>
               <FileCard
                 info={info}
                 editionLabel="专业版"
@@ -102,11 +97,11 @@ const LatestSection: React.FC<LatestSectionProps> = ({
                 onDownload={onDownload}
                 onCopy={onCopy}
               />
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
       )}
-    </div>
+    </section>
   );
 };
 
@@ -192,10 +187,9 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
   }, []);
 
   return (
-    <div>
-      <Divider style={{ marginTop: '5.5rem' }} />
-      <div style={{ textAlign: 'center', margin: '0 auto' }}>
-        <h2 style={{ fontSize: '1.7rem' }}>所有</h2>
+    <section className="panel section-panel">
+      <h2 className="section-title">所有</h2>
+      <div>
         <SystemSelector
           versionsOption={versionsOption}
           editionAndLanguage={editionAndLanguage}
@@ -210,7 +204,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
           onEditionChange={handleEditionChange}
         />
 
-        <div style={{ marginTop: '3rem', marginBottom: '8rem' }}>
+        <div className="files-area">
           {isLoading ? (
             <Space direction="vertical" style={{ width: '100%' }}>
               <SkeletonCard />
@@ -227,19 +221,19 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 // 外部链接区域
 const ExternalLinksSection: React.FC = () => (
-  <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-    <h2 style={{ fontSize: '1.7rem' }}>补充</h2>
+  <section className="panel section-panel">
+    <h2 className="section-title section-title-left">补充</h2>
     <Collapse
       expandIcon
       expandIconPlacement="left"
       expandOnRowClick
-      style={{ marginBottom: '3rem', textAlign: 'left' }}
+      style={{ textAlign: 'left' }}
     >
       <Collapse.Panel header="微软官方页面">
         {EXTERNAL_LINKS.official.map((link) => (
@@ -269,7 +263,7 @@ const ExternalLinksSection: React.FC = () => (
             <br />
           </React.Fragment>
         ))}
-        <span>注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
+        <span className="links-note">注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
       </Collapse.Panel>
 
       <Collapse.Panel header="第三方修改版系统站点">
@@ -282,10 +276,10 @@ const ExternalLinksSection: React.FC = () => (
             <br />
           </React.Fragment>
         ))}
-        <span>注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
+        <span className="links-note">注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
       </Collapse.Panel>
     </Collapse>
-  </div>
+  </section>
 );
 
 // 首页组件
@@ -319,9 +313,8 @@ export const Home: React.FC = () => {
 
   return (
     <ErrorBoundary onReset={() => window.location.reload()}>
-      <div>
+      <div className="home-page">
         <PageHeader />
-        <Divider style={{ marginTop: '2.5rem' }} />
         <LatestSection
           latestFiles={latestFiles}
           isLoading={isLoadingLatest}
@@ -339,7 +332,6 @@ export const Home: React.FC = () => {
           onDownload={handleDownload}
           onCopy={handleCopy}
         />
-        <Divider style={{ marginTop: '3rem' }} />
         <ExternalLinksSection />
       </div>
     </ErrorBoundary>

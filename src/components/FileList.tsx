@@ -85,7 +85,7 @@ export const FileList: React.FC<FileListProps> = ({
         />
       )}
       {filteredFiles.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '20px', color: 'var(--td-text-color-placeholder)' }}>
+        <div className="file-empty">
           没有找到匹配的文件
         </div>
       ) : (

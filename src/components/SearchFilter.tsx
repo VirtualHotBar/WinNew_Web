@@ -4,8 +4,8 @@
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
-import { Input, Space, Tag, Button } from 'tdesign-react';
-import { SearchIcon, CloseIcon } from 'tdesign-icons-react';
+import { Input, Space, Tag } from 'tdesign-react';
+import { SearchIcon } from 'tdesign-icons-react';
 import type { WinFileInfo } from '../types/api';
 
 interface SearchFilterProps {
@@ -34,7 +34,6 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState<SearchField>('all');
-  const [isExpanded, setIsExpanded] = useState(false);
 
   /**
    * 执行搜索过滤
@@ -107,7 +106,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
   }, []);
 
   return (
-    <div style={{ marginBottom: '16px' }}>
+    <div className="filter-bar">
       <Space direction="vertical" style={{ width: '100%' }}>
         <Input
           value={searchTerm}
@@ -118,15 +117,15 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
           onClear={handleClear}
           suffix={
             files.length > 0 && (
-              <span style={{ color: 'var(--td-text-color-placeholder)', fontSize: '12px' }}>
+              <span className="filter-count">
                 {filteredFiles.length}/{files.length}
               </span>
             )
           }
         />
-        
-        <Space size="small" style={{ flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '14px', color: 'var(--td-text-color-secondary)' }}>
+
+        <div className="filter-tags">
+          <span className="filter-tags-label">
             搜索范围:
           </span>
           {SEARCH_FIELDS.map((field) => (
@@ -134,13 +133,13 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
               key={field.value}
               theme={searchField === field.value ? 'primary' : 'default'}
               variant={searchField === field.value ? 'light' : 'outline'}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
               onClick={() => handleFieldChange(field.value)}
             >
               {field.label}
             </Tag>
           ))}
-        </Space>
+        </div>
       </Space>
     </div>
   );

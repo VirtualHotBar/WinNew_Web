@@ -34,49 +34,50 @@ export const FileCard: React.FC<FileCardProps> = ({
   }, [info, editionLabel, showTitle]);
 
   return (
-    <Card
-      title={title}
-      actions={<span style={{ color: 'var(--td-text-color-primary)' }}>{info.PushTime}</span>}
-      bordered
-      hoverShadow
-      footer={
-        <Row align="middle" justify="center">
-          <Col flex="auto">
-            <Button onClick={() => onDownload(info.FilePath)}>立即下载</Button>
+    <div className="file-card">
+      <Card
+        title={title}
+        actions={<span>{info.PushTime}</span>}
+        bordered
+        hoverShadow
+        footer={
+          <Row className="file-card-actions" align="middle" justify="center">
+            <Col>
+              <Button theme="primary" onClick={() => onDownload(info.FilePath)}>立即下载</Button>
+            </Col>
+            <Col>
+              <Button variant="outline" onClick={() => onCopy(info.FilePath)}>复制直链</Button>
+            </Col>
+          </Row>
+        }
+      >
+        <Row align="middle" justify="center" gutter={12}>
+          <Col flex="auto" className="file-card-top">
+            <span>
+              内部版本<br /><strong>{info.BuildVer}</strong>
+            </span>
           </Col>
-          <Col flex="auto">
-            <Button onClick={() => onCopy(info.FilePath)}>复制直链</Button>
+          <Col flex="auto" className="file-card-top">
+            <span>
+              大小<br /><strong>{formatFileSize(info.Size)}</strong>
+            </span>
+          </Col>
+          <Col flex="auto" className="file-card-top">
+            <span>
+              语言<br /><strong>{languageLabel || info.Language}</strong>
+            </span>
+          </Col>
+          <Col flex="auto" className="file-card-top">
+            <span>
+              架构<br /><strong>{info.Architecture}</strong>
+            </span>
           </Col>
         </Row>
-      }
-    >
-      <Row align="middle" justify="center">
-        <Col flex="auto">
-          <span>
-            内部版本<br /><strong>{info.BuildVer}</strong>
-          </span>
-        </Col>
-        <Col flex="auto">
-          <span>
-            大小<br /><strong>{formatFileSize(info.Size)}</strong>
-          </span>
-        </Col>
-        <Col flex="auto">
-          <span>
-            语言<br /><strong>{languageLabel || info.Language}</strong>
-          </span>
-        </Col>
-        <Col flex="auto">
-          <span>
-            架构<br /><strong>{info.Architecture}</strong>
-          </span>
-        </Col>
-      </Row>
-      <br />
-      <span>
-        SHA1<br /><strong>{info.Sha1}</strong>
-      </span>
-    </Card>
+        <span className="file-card-sha1">
+          SHA1<br /><strong>{info.Sha1}</strong>
+        </span>
+      </Card>
+    </div>
   );
 };
 

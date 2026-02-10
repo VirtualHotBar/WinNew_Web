@@ -1,5 +1,4 @@
 
-
 import { Layout, Menu } from 'tdesign-react';
 import 'tdesign-react/es/style/index.css';
 import {
@@ -7,6 +6,7 @@ import {
   Routes,
   Route,
   Link,
+  useLocation,
 } from 'react-router-dom';
 
 import '../global/main.css';
@@ -21,8 +21,6 @@ import { pages } from '../pages.config';
 
 const { Header, Content, Footer } = Layout;
 const { HeadMenu, MenuItem } = Menu;
-
-
 
 const routers: RouterItem[] = [
   {
@@ -67,54 +65,47 @@ const seoConfigs: Record<string, SEOConfig> = {
   },
 };
 
-
-const headerStyle = {
-  boxShadow: '0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)',
-};
-
-const contentWrapperStyle = {
-  maxWidth: '1200px',
-  width: '100%',
-  margin: '0 auto',
-  justifyContent: 'center',
-};
-
 export function Layout_() {
   return (
     <Router>
-      <Layout style={{ width: '100%', background: 'var(--td-bg-color-container)' }}>
-        <Header style={headerStyle}>
+      <AppLayout />
+    </Router>
+  );
+}
+
+function AppLayout() {
+  const location = useLocation();
+
+  return (
+    <Layout className="app-layout">
+      <Header className="app-header">
+        <div className="container">
           <HeadMenu
-            value="-"
+            value={location.pathname}
             theme="light"
-            logo={
-              <strong
-                style={{ fontSize: '20px', cursor: 'pointer' }}
-                onClick={() => { window.location.href = '/'; }}
-              >
-                WinNew
-              </strong>
-            }
-            style={contentWrapperStyle}
+            logo={<Link className="brand-logo" to="/">WinNew</Link>}
+            className="main-menu"
           >
-            <div style={{ width: '100%' }}></div>
+            <div className="menu-spacer" />
             {routers.map((item) => (
-              <MenuItem key={item.path}>
+              <MenuItem key={item.path} value={item.path}>
                 <Link to={item.path}>{item.word}</Link>
               </MenuItem>
             ))}
           </HeadMenu>
-        </Header>
-        <Content style={{ padding: '10px', marginTop: '4px' }}>
-          <div style={contentWrapperStyle}>
-            <PageRouter />
-          </div>
-        </Content>
-        <Footer style={{ background: 'var(--td-bg-color-page)', textAlign: 'center' }}>
+        </div>
+      </Header>
+      <Content className="app-content">
+        <div className="container">
+          <PageRouter />
+        </div>
+      </Content>
+      <Footer className="app-footer">
+        <div className="container">
           <FooterContent />
-        </Footer>
-      </Layout>
-    </Router>
+        </div>
+      </Footer>
+    </Layout>
   );
 }
 

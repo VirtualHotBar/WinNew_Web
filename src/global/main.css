@@ -1,71 +1,315 @@
+:root {
+  --app-bg: #f5f7fb;
+  --app-surface: #ffffff;
+  --app-text: #1d2638;
+  --app-text-muted: #5f6f87;
+  --app-primary: #0f6adf;
+  --app-primary-soft: #eaf3ff;
+  --app-border: #dbe4f2;
+  --app-shadow: 0 12px 36px rgba(18, 41, 79, 0.09);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 html {
-    background-color: var(--td-bg-color-container);
+  background: radial-gradient(circle at top right, #e9f1ff 0%, #f5f7fb 42%, #eef2fa 100%);
+}
+
+body {
+  margin: 0;
+  color: var(--app-text);
+  line-height: 1.6;
 }
 
 p {
-    font-size: 1rem;
+  font-size: 1rem;
+  margin: 0;
 }
+
+.container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.app-layout {
+  width: 100%;
+  background: transparent;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(9px);
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid rgba(219, 228, 242, 0.7);
+  box-shadow: 0 6px 22px rgba(26, 48, 87, 0.08);
+}
+
+.main-menu {
+  width: 100%;
+  background: transparent;
+}
+
+.menu-spacer {
+  flex: 1;
+}
+
+.brand-logo {
+  color: var(--app-text);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.brand-logo:hover {
+  color: var(--app-primary);
+}
+
+.app-content {
+  padding: 24px 0 18px;
+}
+
+.app-footer {
+  background: transparent;
+  padding-bottom: 12px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.83) 100%);
+  border: 1px solid rgba(219, 228, 242, 0.7);
+  border-radius: 20px;
+  box-shadow: var(--app-shadow);
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-bottom: 24px;
+}
+
+.page-hero {
+  text-align: center;
+  padding: 42px 16px 36px;
+}
+
+.page-hero h1 {
+  margin: 14px 0 8px;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.15;
+}
+
+.page-subtitle {
+  color: var(--app-text-muted);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+}
+
+.section-panel {
+  padding: 24px;
+}
+
+.section-title {
+  margin: 0 0 18px;
+  font-size: 1.42rem;
+  text-align: center;
+}
+
+.section-title-left {
+  text-align: left;
+}
+
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.selector-grid .t-select {
+  width: 100%;
+}
+
+.files-area {
+  margin-top: 22px;
+}
+
+.file-card + .file-card {
+  margin-top: 14px;
+}
+
+.file-card .t-card {
+  border-radius: 16px;
+  border: 1px solid var(--app-border);
+  box-shadow: 0 8px 24px rgba(17, 36, 66, 0.06);
+}
+
+.file-card-top {
+  text-align: center;
+}
+
+.file-card-top strong {
+  font-size: 1.05rem;
+}
+
+.file-card-sha1 {
+  margin-top: 10px;
+  display: block;
+  color: var(--app-text-muted);
+  word-break: break-all;
+}
+
+.file-card-actions .t-button + .t-button {
+  margin-left: 10px;
+}
+
+.filter-bar {
+  margin-bottom: 14px;
+}
+
+.filter-count {
+  color: var(--app-text-muted);
+  font-size: 12px;
+}
+
+.filter-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-tags-label {
+  color: var(--app-text-muted);
+  font-size: 14px;
+}
+
+.file-empty {
+  text-align: center;
+  padding: 26px 12px;
+  color: var(--app-text-muted);
+}
+
+.links-note {
+  color: var(--app-text-muted);
+  font-size: 13px;
+}
+
+.footer-content {
+  text-align: center;
+  padding: 18px 0 10px;
+}
+
+.friend-links {
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 12px 16px 16px;
+}
+
+.copyright {
+  margin-top: 10px;
+  border-top: 1px solid rgba(219, 228, 242, 0.9);
+  padding-top: 12px;
+}
+
 .class-link {
-    color: #2DBAE8;
-    text-decoration: none !important;
-    transition: opacity 0.1s ease;
+  color: var(--app-primary);
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 .class-link:hover {
-    opacity: 0.8;
-    text-decoration: none !important;
+  color: #0d5bc0;
+  opacity: 0.95;
 }
 
-.class-link:visited {
-    text-decoration: none !important;
+.about-page,
+.donation-page {
+  margin: 26px auto 64px;
+  padding: 30px 24px;
+  text-align: center;
 }
 
-.class-link:active {
-    text-decoration: none !important;
+.about-page p {
+  margin: 10px auto 0;
+  max-width: 780px;
 }
 
-.class-link[disabled] {
-    cursor: not-allowed;
-    opacity: 0.6;
+.donation-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
 }
-
 
 .donation-table {
-    margin: 0 auto;
-    /* 表格居中显示 */
-    width: 100%;
-    /* 表格宽度设置为父容器的100%，实现自适应 */
-    max-width: 800px;
-    /* 可设定一个最大宽度以保证在大屏幕上也不会过大 */
-    border-collapse: collapse;
-    /* 去除表格间隔 */
+  margin: 0 auto;
+  width: min(860px, 100%);
+  border-collapse: collapse;
 }
 
 .donation-table th,
 .donation-table td {
-    border: 1px solid var(--td-bg-color-page);
-    /* 单元格边框线 */
-    padding: 8px 12px;
-    /* 单元格内边距 */
-    text-align: center;
-    /* 可选：使表头和内容居中对齐 */
+  border: 1px solid var(--app-border);
+  padding: 10px 12px;
+  text-align: center;
 }
 
 .donation-table thead {
-    background-color: var(--td-bg-color-page);
-    /* 表头背景色 */
-}
-
-.donation-table thead th {
-    font-weight: normal;
-    /* 表头字体不加粗 */
-    color: var(--td-text-color-primary);
-    /* 表头字体颜色 */
-    text-align: center;
-    /* 可选：使表头文字居中对齐 */
+  background: var(--app-primary-soft);
 }
 
 .donation-table img {
-    max-width: 100%;
-    /* 图片宽度设为100%，实现自适应 */
+  width: min(240px, 100%);
+  border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+  .selector-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: min(1120px, calc(100% - 22px));
+  }
+
+  .app-content {
+    padding-top: 14px;
+  }
+
+  .latest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-panel {
+    padding: 18px 14px;
+  }
+
+  .about-page,
+  .donation-page {
+    margin-top: 14px;
+    padding: 20px 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .selector-grid {
+    grid-template-columns: 1fr;
+  }
 }
