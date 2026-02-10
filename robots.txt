@@ -1,3 +1,11 @@
-User-agent: *
+# robots.txt - 告诉搜索引擎哪些页面可以抓取
 
+User-agent: *
 Allow: /
+
+# 允许抓取 sitemap
+Sitemap: https://winnew.cn/sitemap.xml
+
+# 禁止抓取缓存目录
+Disallow: /static/
+Disallow: /assets/
