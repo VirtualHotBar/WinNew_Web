@@ -1,0 +1,23 @@
+/**
+ * 404 处理 - 确保在静态文件托管服务上也能正确路由
+ *
+ * 使用方法：
+ * 1. 将此文件复制到 dist 目录，重命名为 404.html
+ * 2. 或者在部署配置中设置 SPA 路由规则
+ */
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/">
+  <title>Page Not Found</title>
+</head>
+<body>
+  <script>
+    // 自动重定向到首页，让 React Router 处理路由
+    window.location.href = '/';
+  </script>
+  <p>Redirecting...</p>
+</body>
+</html>

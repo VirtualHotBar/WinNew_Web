@@ -1,0 +1,12 @@
+# Nginx 重写规则 - 确保所有路径指向 index.html
+
+location / {
+  try_files $uri $uri/ /index.html;
+}
+
+# 或使用更精确的匹配规则
+location / {
+  if (!-e $request_filename){
+    rewrite ^(.*)$ /index.html break;
+  }
+}

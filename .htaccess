@@ -1,0 +1,12 @@
+# Apache 重写规则 - 确保所有路径指向 index.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 如果请求的是现有文件或目录，不重写
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # 其他所有请求重定向到 index.html
+  RewriteRule ^(.*)$ index.html [L,QSA]
+</IfModule>

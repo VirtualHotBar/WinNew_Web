@@ -1,0 +1,12 @@
+[
+  {
+    "source": "/(.*)",
+    "target": "/index.html",
+    "status": 200,
+    "force": true,
+    "condition": {
+      "key": "path",
+      "not_match": ["/static/*", "/*.*"]
+    }
+  }
+]
