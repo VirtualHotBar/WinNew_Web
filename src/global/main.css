@@ -151,6 +151,10 @@ p {
   color: var(--app-text-muted);
 }
 
+.all-system-left .selector-grid {
+  grid-template-columns: 1fr;
+}
+
 .latest-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -196,8 +200,9 @@ p {
   word-break: break-all;
 }
 
-.file-card-actions .t-button + .t-button {
-  margin-left: 10px;
+.file-card-actions {
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .filter-bar {
