@@ -189,22 +189,26 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
   return (
     <section className="panel section-panel">
       <h2 className="section-title">所有</h2>
-      <div>
-        <SystemSelector
-          versionsOption={versionsOption}
-          editionAndLanguage={editionAndLanguage}
-          isLoadingOptions={isLoadingOptions}
-          systemCode={filters.systemCode}
-          version={filters.version}
-          language={filters.language}
-          edition={filters.edition}
-          onSystemCodeChange={handleSystemCodeChange}
-          onVersionChange={handleVersionChange}
-          onLanguageChange={handleLanguageChange}
-          onEditionChange={handleEditionChange}
-        />
+      <div className="all-system-layout">
+        <div className="all-system-left">
+          <h3 className="all-system-subtitle">筛选选项</h3>
+          <SystemSelector
+            versionsOption={versionsOption}
+            editionAndLanguage={editionAndLanguage}
+            isLoadingOptions={isLoadingOptions}
+            systemCode={filters.systemCode}
+            version={filters.version}
+            language={filters.language}
+            edition={filters.edition}
+            onSystemCodeChange={handleSystemCodeChange}
+            onVersionChange={handleVersionChange}
+            onLanguageChange={handleLanguageChange}
+            onEditionChange={handleEditionChange}
+          />
+        </div>
 
-        <div className="files-area">
+        <div className="all-system-right files-area">
+          <h3 className="all-system-subtitle">查询结果</h3>
           {isLoading ? (
             <Space direction="vertical" style={{ width: '100%' }}>
               <SkeletonCard />
@@ -228,14 +232,15 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
 // 外部链接区域
 const ExternalLinksSection: React.FC = () => (
   <section className="panel section-panel">
-    <h2 className="section-title section-title-left">补充</h2>
+    <h2 className="section-title">补充</h2>
     <Collapse
+      defaultValue={['official', 'thirdParty-original']}
       expandIcon
       expandIconPlacement="left"
       expandOnRowClick
       style={{ textAlign: 'left' }}
     >
-      <Collapse.Panel header="微软官方页面">
+      <Collapse.Panel value="official" header="微软官方页面">
         {EXTERNAL_LINKS.official.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
@@ -246,7 +251,7 @@ const ExternalLinksSection: React.FC = () => (
         ))}
       </Collapse.Panel>
 
-      <Collapse.Panel header="第三方原版系统站点">
+      <Collapse.Panel value="thirdParty-original" header="第三方原版系统站点">
         {EXTERNAL_LINKS.thirdPartyOriginal.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
@@ -266,7 +271,7 @@ const ExternalLinksSection: React.FC = () => (
         <span className="links-note">注：以上站点不保证可用性、安全性、质量，请自行判断。</span>
       </Collapse.Panel>
 
-      <Collapse.Panel header="第三方修改版系统站点">
+      <Collapse.Panel value="thirdParty-modified" header="第三方修改版系统站点">
         {EXTERNAL_LINKS.thirdPartyModified.map((link) => (
           <React.Fragment key={link.url}>
             <Link theme="primary" href={link.url} target="_blank">
