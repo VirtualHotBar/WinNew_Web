@@ -224,10 +224,14 @@ export async function fetchEditionAndLanguageOptions(
  */
 export async function fetchLatestWinInfos(): Promise<WinFileInfo[]> {
   const [latestInfos11, latestInfos10] = await Promise.all([
-    fetchWinInfos('11'),
-    fetchWinInfos('10'),
+    fetchWinInfos('11', 'latest', 'zh-cn', 'x64', 'Professional'),
+    fetchWinInfos('10', 'latest', 'zh-cn', 'x64', 'Professional'),
   ]);
-  return [...latestInfos11, ...latestInfos10];
+
+  const latest11 = latestInfos11[0];
+  const latest10 = latestInfos10[0];
+
+  return [latest11, latest10].filter((item): item is WinFileInfo => Boolean(item));
 }
 
 /**
