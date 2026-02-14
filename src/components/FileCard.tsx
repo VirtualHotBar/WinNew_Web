@@ -4,7 +4,7 @@
  */
 
 import React, { useMemo } from 'react';
-import { Card, Button, Row, Col } from 'tdesign-react';
+import { Card, Button, Row, Col, Popup } from 'tdesign-react';
 import { formatFileSize } from '../utils/format';
 import type { WinFileInfo } from '../types/api';
 
@@ -35,6 +35,12 @@ export const FileCard: React.FC<FileCardProps> = ({
 
   const hashLabel = info.Sha256 ? 'SHA256' : 'SHA1';
   const hashValue = info.Sha256 || info.Sha1 || '-';
+  const hashPopupContent = (
+    <div className="file-card-hash-popup">
+      <div><strong>SHA1:</strong> {info.Sha1 || '-'}</div>
+      <div><strong>SHA256:</strong> {info.Sha256 || '-'}</div>
+    </div>
+  );
 
   return (
     <div className="file-card">
@@ -76,9 +82,11 @@ export const FileCard: React.FC<FileCardProps> = ({
             </span>
           </Col>
         </Row>
-        <span className="file-card-sha1">
-          {hashLabel}<br /><strong>{hashValue}</strong>
-        </span>
+        <Popup content={hashPopupContent} placement="top" showArrow>
+          <span className="file-card-sha1">
+            <strong>{hashLabel}:</strong> {hashValue}
+          </span>
+        </Popup>
       </Card>
     </div>
   );

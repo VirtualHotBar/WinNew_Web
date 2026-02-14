@@ -210,6 +210,18 @@ p {
   display: block;
   text-align: center;
   color: var(--app-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.file-card-hash-popup {
+  max-width: min(92vw, 760px);
+  line-height: 1.5;
+}
+
+.file-card-hash-popup div {
   word-break: break-all;
 }
 
