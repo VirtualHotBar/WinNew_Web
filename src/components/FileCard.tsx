@@ -35,12 +35,7 @@ export const FileCard: React.FC<FileCardProps> = ({
 
   const hashLabel = info.Sha256 ? 'SHA256' : 'SHA1';
   const hashValue = info.Sha256 || info.Sha1 || '-';
-  const hashPopupContent = (
-    <div className="file-card-hash-popup">
-      <div><strong>SHA1:</strong> {info.Sha1 || '-'}</div>
-      <div><strong>SHA256:</strong> {info.Sha256 || '-'}</div>
-    </div>
-  );
+  const hashPopupContent = <div className="file-card-hash-popup">{hashValue}</div>;
 
   return (
     <div className="file-card">
