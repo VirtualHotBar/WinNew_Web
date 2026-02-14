@@ -201,6 +201,16 @@ p {
   text-align: left;
 }
 
+.file-list-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--app-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .file-list-name {
   font-size: 13px;
   line-height: 1.4;

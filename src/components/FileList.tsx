@@ -61,8 +61,10 @@ export const FileList: React.FC<FileListProps> = ({
       return (
         <List.ListItem className="file-list-row file-list-row-virtual" style={{ top }} key={`${info.FileName}-${index}`}>
           <div className="file-list-main">
+            <div className="file-list-title">
+              {`Windows ${info.SystemCode} ${info.VerCode} (${info.BuildVer})`}
+            </div>
             <div className="file-list-meta">
-              <span>{info.VerCode} ({info.BuildVer})</span>
               <span>{info.Language}</span>
               <span>{info.Edition}</span>
               <span>{info.Architecture}</span>
@@ -74,7 +76,7 @@ export const FileList: React.FC<FileListProps> = ({
             <Link theme="primary" hover="color" onClick={() => onDownload(info.FilePath)}>
               下载
             </Link>
-            <Link theme="default" hover="color" onClick={() => onCopy(info.FilePath)}>
+            <Link theme="primary" hover="color" onClick={() => onCopy(info.FilePath)}>
               复制直链
             </Link>
           </Space>
@@ -93,8 +95,10 @@ export const FileList: React.FC<FileListProps> = ({
     return filteredFiles.map((info, index) => (
       <List.ListItem className="file-list-row" key={`${info.FileName}-${index}`}>
         <div className="file-list-main">
+          <div className="file-list-title">
+            {`Windows ${info.SystemCode} ${info.VerCode} (${info.BuildVer})`}
+          </div>
           <div className="file-list-meta">
-            <span>{info.VerCode} ({info.BuildVer})</span>
             <span>{info.Language}</span>
             <span>{info.Edition}</span>
             <span>{info.Architecture}</span>
@@ -106,7 +110,7 @@ export const FileList: React.FC<FileListProps> = ({
           <Link theme="primary" hover="color" onClick={() => onDownload(info.FilePath)}>
             下载
           </Link>
-          <Link theme="default" hover="color" onClick={() => onCopy(info.FilePath)}>
+          <Link theme="primary" hover="color" onClick={() => onCopy(info.FilePath)}>
             复制直链
           </Link>
         </Space>
