@@ -4,7 +4,8 @@
  */
 
 import React, { useMemo } from 'react';
-import { Card, Button, Row, Col, Popup } from 'tdesign-react';
+import { InfoCircleIcon } from 'tdesign-icons-react';
+import { Card, Button, Row, Col, Tooltip, Link } from 'tdesign-react';
 import { formatFileSize } from '../utils/format';
 import type { WinFileInfo } from '../types/api';
 
@@ -28,20 +29,48 @@ export const FileCard: React.FC<FileCardProps> = ({
   onDownload,
   onCopy,
 }) => {
+  const editionValue = editionLabel || info.Edition || '-';
+  const isConsumerEdition =
+    editionValue === '消费者版' || info.Edition.toLowerCase() === 'consumer';
+  const editionTooltipContent = '含家庭 / 专业 / 教育等全套';
+
   const title = useMemo(() => {
     if (!showTitle) return undefined;
-    return `Windows ${info.SystemCode} ${info.VerCode} ${editionLabel || info.Edition}`;
-  }, [info, editionLabel, showTitle]);
+    const editionText = (
+      <Link
+        className="file-card-title-edition"
+        theme="default"
+        hover="color"
+        underline={false}
+        suffixIcon={<InfoCircleIcon />}
+      >
+        {editionValue}
+      </Link>
+    );
+
+    return (
+      <span className="file-card-title">
+        {`Windows ${info.SystemCode} ${info.VerCode} `}
+        {isConsumerEdition ? (
+          <Tooltip content={editionTooltipContent} placement="top" showArrow>
+            {editionText}
+          </Tooltip>
+        ) : (
+          editionText
+        )}
+      </span>
+    );
+  }, [showTitle, info.SystemCode, info.VerCode, editionValue, isConsumerEdition, editionTooltipContent]);
 
   const hashLabel = info.Sha256 ? 'SHA256' : 'SHA1';
   const hashValue = info.Sha256 || info.Sha1 || '-';
-  const hashPopupContent = <div className="file-card-hash-popup">{hashValue}</div>;
+  const hashTooltipContent = <div className="file-card-hash-popup">{hashValue}</div>;
 
   return (
     <div className="file-card">
       <Card
         title={title}
-        actions={<span>{info.PushTime}</span>}
+        actions={<span style={{color:"black"}}>{info.PushTime}</span>}
         bordered
         hoverShadow
         footer={
@@ -77,11 +106,11 @@ export const FileCard: React.FC<FileCardProps> = ({
             </span>
           </Col>
         </Row>
-        <Popup content={hashPopupContent} placement="top" showArrow>
+        <Tooltip content={hashTooltipContent} placement="top" showArrow>
           <span className="file-card-sha1">
-            <strong>{hashLabel}:</strong> {hashValue}
+            <span className="file-card-sha-label">{hashLabel}:</span> {hashValue}
           </span>
-        </Popup>
+        </Tooltip>
       </Card>
     </div>
   );

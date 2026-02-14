@@ -145,7 +145,7 @@ p {
   margin: 0 0 10px;
   font-size: 1rem;
   color: var(--app-text-muted);
-  text-align: left;
+  text-align: center;
 }
 
 .all-system-filter .selector-grid {
@@ -254,11 +254,46 @@ p {
   margin-top: 10px;
   display: block;
   text-align: center;
-  color: var(--app-text-muted);
+  color: #000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+}
+
+.file-card-sha-label {
+  color: var(--app-text-muted);
+  font-weight: 400;
+}
+
+.file-card-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+a.file-card-title-edition {
+  color: inherit !important;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+a.file-card-title-edition:hover,
+a.file-card-title-edition:focus,
+a.file-card-title-edition:focus-visible,
+a.file-card-title-edition:active {
+  color: inherit !important;
+}
+
+a.file-card-title-edition .t-icon {
+  color: inherit !important;
+  font-size: 0.9em;
+}
+
+a.file-card-title-edition .t-link__suffix-icon {
+  margin-left: 2px;
 }
 
 .file-card-hash-popup {

@@ -92,7 +92,7 @@ const LatestSection: React.FC<LatestSectionProps> = ({
             <div key={`${info.SystemCode}-${info.BuildVer}`}>
               <FileCard
                 info={info}
-                editionLabel="专业版"
+                editionLabel="消费者版"
                 languageLabel="简体中文"
                 onDownload={onDownload}
                 onCopy={onCopy}
@@ -226,6 +226,13 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
     }));
   }, []);
 
+  const hasSelectedFilters =
+    Boolean(filters.systemCode) ||
+    Boolean(filters.version) ||
+    Boolean(filters.language) ||
+    Boolean(filters.edition) ||
+    filters.architecture !== 'all';
+
   return (
     <section className="panel section-panel">
       <h2 className="section-title">所有</h2>
@@ -257,7 +264,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
         ) : (
           <FileList
             files={filteredFiles}
-            emptyContent={<strong>请选择筛选选项</strong>}
+            emptyContent={<strong>{hasSelectedFilters ? '无结果' : '请选择筛选选项'}</strong>}
             onDownload={onDownload}
             onCopy={onCopy}
           />

@@ -30,7 +30,7 @@ const DEFAULT_PARAMS = {
   VERSION: 'latest',
   LANGUAGE_CODE: 'zh-cn',
   ARCHITECTURE: 'x64',
-  EDITION: 'Professional',
+  EDITION: 'consumer',
 } as const;
 
 function normalizeWinFileInfo(file: WinFileInfo): WinFileInfo {
@@ -224,8 +224,8 @@ export async function fetchEditionAndLanguageOptions(
  */
 export async function fetchLatestWinInfos(): Promise<WinFileInfo[]> {
   const [latestInfos11, latestInfos10] = await Promise.all([
-    fetchWinInfos('11', 'latest', 'zh-cn', 'x64', 'Professional'),
-    fetchWinInfos('10', 'latest', 'zh-cn', 'x64', 'Professional'),
+    fetchWinInfos('11', 'latest', 'zh-cn', 'x64', 'consumer'),
+    fetchWinInfos('10', 'latest', 'zh-cn', 'x64', 'consumer'),
   ]);
 
   const latest11 = latestInfos11[0];

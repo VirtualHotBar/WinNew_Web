@@ -69,7 +69,7 @@ export const FileList: React.FC<FileListProps> = ({
   }, [filteredFiles, onCopy, onDownload]);
 
   if (files.length === 0) {
-    return <>{emptyContent}</>;
+    return <div className="file-empty">{emptyContent}</div>;
   }
 
   return (
