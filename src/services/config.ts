@@ -4,7 +4,7 @@
  */
 const config = {
   apiHost: import.meta.env.DEV 
-    ? "http://localhost:3333"   // 开发环境
+    ? "http://localhost:3000"   // 开发环境
     : "https://api.hotpe.top",  // 生产环境
 };
 

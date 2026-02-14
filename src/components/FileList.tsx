@@ -28,16 +28,10 @@ export const FileList: React.FC<FileListProps> = ({
   onCopy,
 }) => {
   const [filteredFiles, setFilteredFiles] = useState<WinFileInfo[]>(files);
-  const [scrollTop, setScrollTop] = useState(0);
-
-  const ROW_HEIGHT = 86;
-  const CONTAINER_HEIGHT = 520;
-  const OVERSCAN = 6;
 
   // 当外部 files 变化时更新过滤列表
   React.useEffect(() => {
     setFilteredFiles(files);
-    setScrollTop(0);
   }, [files]);
 
   /**
@@ -45,50 +39,6 @@ export const FileList: React.FC<FileListProps> = ({
    */
   const handleFilterChange = useCallback((newFilteredFiles: WinFileInfo[]) => {
     setFilteredFiles(newFilteredFiles);
-  }, []);
-
-  const visibleRange = useMemo(() => {
-    const start = Math.max(0, Math.floor(scrollTop / ROW_HEIGHT) - OVERSCAN);
-    const visibleCount = Math.ceil(CONTAINER_HEIGHT / ROW_HEIGHT) + OVERSCAN * 2;
-    const end = Math.min(filteredFiles.length, start + visibleCount);
-    return { start, end };
-  }, [filteredFiles.length, scrollTop]);
-
-  const visibleRows = useMemo(() => {
-    return filteredFiles.slice(visibleRange.start, visibleRange.end).map((info, offset) => {
-      const index = visibleRange.start + offset;
-      const top = index * ROW_HEIGHT;
-      return (
-        <List.ListItem className="file-list-row file-list-row-virtual" style={{ top }} key={`${info.FileName}-${index}`}>
-          <div className="file-list-main">
-            <div className="file-list-title">
-              {`Windows ${info.SystemCode} ${info.VerCode} (${info.BuildVer})`}
-            </div>
-            <div className="file-list-meta">
-              <span>{info.Language}</span>
-              <span>{info.Edition}</span>
-              <span>{info.Architecture}</span>
-              <span>{formatFileSize(info.Size)}</span>
-              <span>SHA: {info.Sha256 || info.Sha1 || '-'}</span>
-            </div>
-          </div>
-          <Space className="file-list-actions" size="small">
-            <Link theme="primary" hover="color" onClick={() => onDownload(info.FilePath)}>
-              下载
-            </Link>
-            <Link theme="primary" hover="color" onClick={() => onCopy(info.FilePath)}>
-              复制直链
-            </Link>
-          </Space>
-        </List.ListItem>
-      );
-    });
-  }, [filteredFiles, onCopy, onDownload, visibleRange]);
-
-  const totalHeight = filteredFiles.length * ROW_HEIGHT;
-
-  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
-    setScrollTop(event.currentTarget.scrollTop);
   }, []);
 
   const renderRows = useMemo(() => {
@@ -136,15 +86,7 @@ export const FileList: React.FC<FileListProps> = ({
           没有找到匹配的文件
         </div>
       ) : (
-        filteredFiles.length <= 30 ? (
-          <List className="file-list-wrap">{renderRows}</List>
-        ) : (
-          <div className="file-list-virtual" style={{ height: CONTAINER_HEIGHT }} onScroll={handleScroll}>
-            <List className="file-list-virtual-inner" style={{ height: totalHeight }}>
-              {visibleRows}
-            </List>
-          </div>
-        )
+        <List className="file-list-wrap">{renderRows}</List>
       )}
     </div>
   );

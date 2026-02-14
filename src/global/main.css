@@ -189,13 +189,6 @@ p {
   background: #fff;
 }
 
-.file-list-row-virtual {
-  position: absolute;
-  left: 0;
-  right: 0;
-  min-height: 78px;
-}
-
 .file-list-main {
   min-width: 0;
   text-align: left;
@@ -233,17 +226,6 @@ p {
 
 .file-list-actions {
   flex-shrink: 0;
-}
-
-.file-list-virtual {
-  overflow: auto;
-  border: 1px solid var(--app-border);
-  border-radius: 12px;
-  background: #fff;
-}
-
-.file-list-virtual-inner {
-  position: relative;
 }
 
 .file-card + .file-card {
