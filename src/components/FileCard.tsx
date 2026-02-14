@@ -70,7 +70,7 @@ export const FileCard: React.FC<FileCardProps> = ({
     <div className="file-card">
       <Card
         title={title}
-        actions={<span style={{color:"black"}}>{info.PushTime}</span>}
+        actions={<span className="file-card-time">{info.PushTime}</span>}
         bordered
         hoverShadow
         footer={

@@ -1,11 +1,12 @@
-
-import { Layout, Menu } from 'tdesign-react';
+import React, { useEffect, useState } from 'react';
+import { Layout, Menu, Link as TLink, Tooltip } from 'tdesign-react';
+import { LaptopIcon, ModeDarkIcon, ModeLightIcon } from 'tdesign-icons-react';
 import 'tdesign-react/es/style/index.css';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
+  Link as RouterLink,
   useLocation,
 } from 'react-router-dom';
 
@@ -18,9 +19,27 @@ import { FooterContent } from '../layout/footer';
 import type { RouterItem } from '../types/layout';
 import { useRouterSEO, type SEOConfig } from '../hooks/useSEO';
 import { pages } from '../pages.config';
+import {
+  getThemeMode,
+  setThemeMode,
+  subscribeThemeModeChange,
+  type ThemeMode,
+} from '../global/index';
 
 const { Header, Content, Footer } = Layout;
 const { HeadMenu, MenuItem } = Menu;
+
+const THEME_MODE_ICON: Record<ThemeMode, React.ReactNode> = {
+  auto: <LaptopIcon />,
+  dark: <ModeDarkIcon />,
+  light: <ModeLightIcon />,
+};
+
+const THEME_MODE_LABEL: Record<ThemeMode, string> = {
+  auto: '自动',
+  dark: '深色',
+  light: '浅色',
+};
 
 const routers: RouterItem[] = [
   {
@@ -75,6 +94,15 @@ export function Layout_() {
 
 function AppLayout() {
   const location = useLocation();
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(getThemeMode());
+
+  useEffect(() => subscribeThemeModeChange(setThemeModeState), []);
+
+  const handleThemeModeToggle = () => {
+    const nextMode: ThemeMode =
+      themeMode === 'auto' ? 'dark' : themeMode === 'dark' ? 'light' : 'auto';
+    setThemeMode(nextMode);
+  };
 
   return (
     <Layout className="app-layout">
@@ -82,14 +110,31 @@ function AppLayout() {
         <div className="container">
           <HeadMenu
             value={location.pathname}
-            theme="light"
-            logo={<Link className="brand-logo" to="/">WinNew</Link>}
+            theme={themeMode === 'dark' ? 'dark' : 'light'}
+            logo={<RouterLink className="brand-logo" to="/">WinNew</RouterLink>}
             className="main-menu"
           >
             <div className="menu-spacer" />
+            <div className="theme-mode-control">
+              <Tooltip
+                content={`当前：${THEME_MODE_LABEL[themeMode]}（点击切换）`}
+                placement="bottom"
+                showArrow
+              >
+                <TLink
+                  className="theme-mode-link"
+                  theme="default"
+                  hover="color"
+                  underline={false}
+                  onClick={handleThemeModeToggle}
+                >
+                  {THEME_MODE_ICON[themeMode]}
+                </TLink>
+              </Tooltip>
+            </div>
             {routers.map((item) => (
               <MenuItem key={item.path} value={item.path}>
-                <Link to={item.path}>{item.word}</Link>
+                <RouterLink to={item.path}>{item.word}</RouterLink>
               </MenuItem>
             ))}
           </HeadMenu>
