@@ -498,6 +498,7 @@ a.file-card-title-edition .t-link__suffix-icon {
 
 [theme-mode='dark'] .donation-table img {
   filter: invert(1);
+  mix-blend-mode: screen;
 }
 
 @media (max-width: 992px) {
