@@ -135,6 +135,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
     version: '',
     language: '',
     edition: '',
+    architecture: 'all',
   });
 
   // 当版本变化时加载版本和语言选项
@@ -157,6 +158,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
       version: '',
       language: '',
       edition: '',
+      architecture: 'all',
     }));
   }, []);
 
@@ -167,6 +169,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
       version: value,
       language: '',
       edition: '',
+      architecture: 'all',
     }));
   }, []);
 
@@ -186,6 +189,13 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
     }));
   }, []);
 
+  const handleArchitectureChange = useCallback((value: 'all' | 'x64' | 'x86' | 'arm64') => {
+    setFilters((prev) => ({
+      ...prev,
+      architecture: value,
+    }));
+  }, []);
+
   return (
     <section className="panel section-panel">
       <h2 className="section-title">所有</h2>
@@ -200,10 +210,12 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
             version={filters.version}
             language={filters.language}
             edition={filters.edition}
+            architecture={filters.architecture}
             onSystemCodeChange={handleSystemCodeChange}
             onVersionChange={handleVersionChange}
             onLanguageChange={handleLanguageChange}
             onEditionChange={handleEditionChange}
+            onArchitectureChange={handleArchitectureChange}
           />
         </div>
 
@@ -309,6 +321,7 @@ export const Home: React.FC = () => {
     version: '',
     language: '',
     edition: '',
+    architecture: 'all',
   });
 
   // 当筛选条件变化时加载文件列表

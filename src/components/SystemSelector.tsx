@@ -16,10 +16,12 @@ interface SystemSelectorProps {
   version: string;
   language: string;
   edition: string;
+  architecture: 'all' | 'x64' | 'x86' | 'arm64';
   onSystemCodeChange: (value: string) => void;
   onVersionChange: (value: string) => void;
   onLanguageChange: (value: string) => void;
   onEditionChange: (value: string) => void;
+  onArchitectureChange: (value: 'all' | 'x64' | 'x86' | 'arm64') => void;
 }
 
 /**
@@ -33,10 +35,12 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
   version,
   language,
   edition,
+  architecture,
   onSystemCodeChange,
   onVersionChange,
   onLanguageChange,
   onEditionChange,
+  onArchitectureChange,
 }) => {
   // 记忆化版本选项
   const versionOptions = useMemo(() => {
@@ -68,6 +72,18 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
   const handleEditionChange = useCallback((value: unknown) => {
     onEditionChange(String(value || ''));
   }, [onEditionChange]);
+
+  const handleArchitectureChange = useCallback((value: unknown) => {
+    const selected = String(value || 'all') as 'all' | 'x64' | 'x86' | 'arm64';
+    onArchitectureChange(selected);
+  }, [onArchitectureChange]);
+
+  const architectureOptions = useMemo(() => ([
+    { label: '全部架构', value: 'all' },
+    { label: 'x64', value: 'x64' },
+    { label: 'x86', value: 'x86' },
+    { label: 'arm64', value: 'arm64' },
+  ]), []);
 
   return (
     <Loading loading={isLoadingOptions} size="small">
@@ -106,6 +122,14 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
           placeholder={isEditionDisabled ? '请先选择版本号' : '选择版本'}
           clearable
           onChange={handleEditionChange}
+        />
+        <Select
+          value={architecture}
+          prefixIcon={<>架构:</>}
+          options={architectureOptions}
+          placeholder="选择架构"
+          clearable={false}
+          onChange={handleArchitectureChange}
         />
       </div>
     </Loading>

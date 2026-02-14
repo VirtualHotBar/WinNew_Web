@@ -8,7 +8,6 @@ import type {
   WinFileInfo,
   VersionsOption,
   EditionAndLanguage,
-  ApiResponse,
 } from '../types/api';
 
 // API 基础 URL
@@ -32,6 +31,14 @@ const DEFAULT_PARAMS = {
   ARCHITECTURE: 'x64',
   EDITION: 'Professional',
 } as const;
+
+function normalizeWinFileInfo(file: WinFileInfo): WinFileInfo {
+  return {
+    ...file,
+    Sha1: file.Sha1 || '',
+    Sha256: file.Sha256 || '',
+  };
+}
 
 /**
  * API 错误类
@@ -99,6 +106,7 @@ export async function fetchWinInfos(
   systemCode: string = DEFAULT_PARAMS.SYSTEM_CODE,
   version: string = '',
   languageCode: string = '',
+  architecture: string = '',
   edition: string = '',
   signal?: AbortSignal
 ): Promise<WinFileInfo[]> {
@@ -106,6 +114,7 @@ export async function fetchWinInfos(
     SystemCode: systemCode,
     Version: version,
     LanguageCode: languageCode,
+    Architecture: architecture,
     Edition: edition,
   });
 
@@ -122,7 +131,8 @@ export async function fetchWinInfos(
       signal: signal || controller.signal,
     });
     clearTimeout(timeoutId);
-    return handleResponse<WinFileInfo[]>(response);
+    const files = await handleResponse<WinFileInfo[]>(response);
+    return files.map(normalizeWinFileInfo);
   } catch (error) {
     clearTimeout(timeoutId);
     throw error;

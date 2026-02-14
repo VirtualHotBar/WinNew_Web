@@ -33,6 +33,9 @@ export const FileCard: React.FC<FileCardProps> = ({
     return `Windows ${info.SystemCode} ${info.VerCode} ${editionLabel || info.Edition}`;
   }, [info, editionLabel, showTitle]);
 
+  const hashLabel = info.Sha256 ? 'SHA256' : 'SHA1';
+  const hashValue = info.Sha256 || info.Sha1 || '-';
+
   return (
     <div className="file-card">
       <Card
@@ -74,7 +77,7 @@ export const FileCard: React.FC<FileCardProps> = ({
           </Col>
         </Row>
         <span className="file-card-sha1">
-          SHA1<br /><strong>{info.Sha1}</strong>
+          {hashLabel}<br /><strong>{hashValue}</strong>
         </span>
       </Card>
     </div>

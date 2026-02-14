@@ -81,7 +81,7 @@ export const FileList: React.FC<FileListProps> = ({
         <SearchFilter
           files={files}
           onFilterChange={handleFilterChange}
-          placeholder="搜索文件名、版本号、内部版本或SHA1..."
+          placeholder="搜索文件名、版本号、内部版本或SHA1/SHA256..."
         />
       )}
       {filteredFiles.length === 0 ? (

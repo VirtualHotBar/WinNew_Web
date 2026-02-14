@@ -1,6 +1,6 @@
 /**
  * SearchFilter Component
- * 搜索过滤组件，支持按文件名、版本号、SHA1搜索
+ * 搜索过滤组件，支持按文件名、版本号、SHA1/SHA256搜索
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
@@ -14,7 +14,7 @@ interface SearchFilterProps {
   placeholder?: string;
 }
 
-type SearchField = 'all' | 'filename' | 'version' | 'sha1' | 'build';
+type SearchField = 'all' | 'filename' | 'version' | 'sha1' | 'sha256' | 'build';
 
 const SEARCH_FIELDS: { value: SearchField; label: string }[] = [
   { value: 'all', label: '全部' },
@@ -22,6 +22,7 @@ const SEARCH_FIELDS: { value: SearchField; label: string }[] = [
   { value: 'version', label: '版本号' },
   { value: 'build', label: '内部版本' },
   { value: 'sha1', label: 'SHA1' },
+  { value: 'sha256', label: 'SHA256' },
 ];
 
 /**
@@ -57,6 +58,8 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
           return file.BuildVer.toLowerCase().includes(lowerTerm);
         case 'sha1':
           return file.Sha1.toLowerCase().includes(lowerTerm);
+        case 'sha256':
+          return file.Sha256.toLowerCase().includes(lowerTerm);
         case 'all':
         default:
           return (
@@ -64,6 +67,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({
             file.VerCode.toLowerCase().includes(lowerTerm) ||
             file.BuildVer.toLowerCase().includes(lowerTerm) ||
             file.Sha1.toLowerCase().includes(lowerTerm) ||
+            file.Sha256.toLowerCase().includes(lowerTerm) ||
             file.Edition.toLowerCase().includes(lowerTerm)
           );
       }

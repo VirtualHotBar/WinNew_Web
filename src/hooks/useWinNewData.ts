@@ -35,6 +35,7 @@ interface UseWinNewDataReturn {
     version: string;
     language: string;
     edition: string;
+    architecture: 'all' | 'x64' | 'x86' | 'arm64';
   }) => Promise<void>;
   loadEditionAndLanguage: (systemCode: string, version: string) => Promise<void>;
   handleDownload: (url: string) => void;
@@ -135,11 +136,12 @@ export function useWinNewData(): UseWinNewDataReturn {
       version: string;
       language: string;
       edition: string;
+      architecture: 'all' | 'x64' | 'x86' | 'arm64';
     }) => {
-      const { systemCode, version, language, edition } = params;
+      const { systemCode, version, language, edition, architecture } = params;
 
       // 如果参数不完整，清空结果
-      if (!systemCode || !version || !language || !edition) {
+      if (!systemCode || !version || !language || !edition || !architecture) {
         setFilteredFiles([]);
         return;
       }
@@ -160,6 +162,7 @@ export function useWinNewData(): UseWinNewDataReturn {
           systemCode,
           version,
           language,
+          architecture,
           edition,
           abortController.signal
         );

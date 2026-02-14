@@ -12,6 +12,7 @@ export interface WinFileInfo {
   Architecture: 'x64' | 'x86' | 'arm64';
   Size: string;
   Sha1: string;
+  Sha256: string;
   FilePath: string;
   Architecture_Loc: string;
   Edition_Loc: string;
@@ -78,6 +79,7 @@ export interface FilterState {
   version: string;
   language: string;
   edition: string;
+  architecture: 'all' | 'x64' | 'x86' | 'arm64';
 }
 
 // 文件卡片 Props
