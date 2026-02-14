@@ -112,7 +112,13 @@ interface AllSystemSectionProps {
   filteredFiles: WinFileInfo[];
   isLoading: boolean;
   isLoadingOptions?: boolean;
-  onLoadEditionAndLanguage: (systemCode: string, version: string) => Promise<void>;
+  onLoadEditionAndLanguage: (
+    systemCode: string,
+    version: string,
+    language: string,
+    edition: string,
+    architecture: 'all' | 'x64' | 'x86' | 'arm64'
+  ) => Promise<void>;
   onFilterChange: (filters: FilterState) => void;
   onDownload: (url: string) => void;
   onCopy: (url: string) => void;
@@ -140,10 +146,35 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
 
   // 当版本变化时加载版本和语言选项
   useEffect(() => {
-    if (filters.version) {
-      onLoadEditionAndLanguage(filters.systemCode, filters.version);
+    if (filters.systemCode && filters.version) {
+      onLoadEditionAndLanguage(
+        filters.systemCode,
+        filters.version,
+        filters.language,
+        filters.edition,
+        filters.architecture
+      );
     }
-  }, [filters.version, filters.systemCode, onLoadEditionAndLanguage]);
+  }, [filters, onLoadEditionAndLanguage]);
+
+  useEffect(() => {
+    if (!editionAndLanguage) return;
+
+    const hasLanguage =
+      !filters.language ||
+      editionAndLanguage.Language.some((item) => item.value === filters.language);
+    const hasEdition =
+      !filters.edition ||
+      editionAndLanguage.Edition.some((item) => item.value === filters.edition);
+
+    if (!hasLanguage || !hasEdition) {
+      setFilters((prev) => ({
+        ...prev,
+        language: hasLanguage ? prev.language : '',
+        edition: hasEdition ? prev.edition : '',
+      }));
+    }
+  }, [editionAndLanguage, filters.language, filters.edition]);
 
   // 当筛选条件变化时通知父组件
   useEffect(() => {

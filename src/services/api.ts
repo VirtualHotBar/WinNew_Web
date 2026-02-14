@@ -17,7 +17,8 @@ const API_BASE = config.apiHost;
 const ENDPOINTS = {
   GET_FILE_LIST: '/winnew/file-list',
   GET_VERSION_OPTIONS: '/winnew/options/version',
-  GET_EDITION_AND_LANGUAGE_OPTIONS: '/winnew/options/edition-language',
+  GET_EDITION_OPTIONS: '/winnew/options/edition',
+  GET_LANGUAGE_OPTIONS: '/winnew/options/language',
 } as const;
 
 // 请求超时时间 (毫秒)
@@ -168,13 +169,11 @@ export async function fetchVersionOptions(signal?: AbortSignal): Promise<Version
 export async function fetchEditionAndLanguageOptions(
   systemCode: string,
   version: string,
+  languageCode: string,
+  edition: string,
+  architecture: string,
   signal?: AbortSignal
 ): Promise<EditionAndLanguage> {
-  const queryString = buildQueryString({
-    SystemCode: systemCode,
-    Version: version,
-  });
-
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
 
@@ -183,12 +182,39 @@ export async function fetchEditionAndLanguageOptions(
   }
 
   try {
-    const response = await fetch(
-      `${API_BASE}${ENDPOINTS.GET_EDITION_AND_LANGUAGE_OPTIONS}${queryString}`,
-      { signal: signal || controller.signal }
-    );
+    const finalSignal = signal || controller.signal;
+    const [editionResponse, languageResponse] = await Promise.all([
+      fetch(
+        `${API_BASE}${ENDPOINTS.GET_EDITION_OPTIONS}${buildQueryString({
+          SystemCode: systemCode,
+          Version: version,
+          LanguageCode: languageCode,
+          Architecture: architecture,
+        })}`,
+        { signal: finalSignal }
+      ),
+      fetch(
+        `${API_BASE}${ENDPOINTS.GET_LANGUAGE_OPTIONS}${buildQueryString({
+          SystemCode: systemCode,
+          Version: version,
+          Edition: edition,
+          Architecture: architecture,
+        })}`,
+        { signal: finalSignal }
+      ),
+    ]);
+
     clearTimeout(timeoutId);
-    return handleResponse<EditionAndLanguage>(response);
+
+    const [editionData, languageData] = await Promise.all([
+      handleResponse<{ Edition: EditionAndLanguage['Edition'] }>(editionResponse),
+      handleResponse<{ Language: EditionAndLanguage['Language'] }>(languageResponse),
+    ]);
+
+    return {
+      Edition: editionData.Edition || [],
+      Language: languageData.Language || [],
+    };
   } catch (error) {
     clearTimeout(timeoutId);
     throw error;

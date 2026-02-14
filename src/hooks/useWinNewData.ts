@@ -37,7 +37,13 @@ interface UseWinNewDataReturn {
     edition: string;
     architecture: 'all' | 'x64' | 'x86' | 'arm64';
   }) => Promise<void>;
-  loadEditionAndLanguage: (systemCode: string, version: string) => Promise<void>;
+  loadEditionAndLanguage: (
+    systemCode: string,
+    version: string,
+    language: string,
+    edition: string,
+    architecture: 'all' | 'x64' | 'x86' | 'arm64'
+  ) => Promise<void>;
   handleDownload: (url: string) => void;
   handleCopy: (url: string) => Promise<void>;
 }
@@ -110,14 +116,26 @@ export function useWinNewData(): UseWinNewDataReturn {
    * 加载版本和语言选项
    */
   const loadEditionAndLanguage = useCallback(
-    async (systemCode: string, version: string) => {
+    async (
+      systemCode: string,
+      version: string,
+      language: string,
+      edition: string,
+      architecture: 'all' | 'x64' | 'x86' | 'arm64'
+    ) => {
       if (!systemCode || !version) {
         setEditionAndLanguage({ Language: [], Edition: [] });
         return;
       }
 
       try {
-        const data = await fetchEditionAndLanguageOptions(systemCode, version);
+        const data = await fetchEditionAndLanguageOptions(
+          systemCode,
+          version,
+          language,
+          edition,
+          architecture
+        );
         setEditionAndLanguage(data);
       } catch (err) {
         console.error('Failed to load edition and language options:', err);
