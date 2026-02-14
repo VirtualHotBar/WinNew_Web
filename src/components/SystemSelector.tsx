@@ -45,7 +45,8 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
   // 记忆化版本选项
   const versionOptions = useMemo(() => {
     if (!systemCode || !versionsOption) return [];
-    return versionsOption.Versions[systemCode] || [];
+    const options = versionsOption.Versions[systemCode] || [];
+    return [...options].sort((a, b) => b.label.localeCompare(a.label, undefined, { numeric: true }));
   }, [systemCode, versionsOption]);
 
   // 计算禁用状态
@@ -85,6 +86,13 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
     { label: 'arm64', value: 'arm64' },
   ]), []);
 
+  const languageOptions = useMemo(() => {
+    return (editionAndLanguage?.Language || []).map((item) => ({
+      ...item,
+      label: item.label_cn || item.label,
+    }));
+  }, [editionAndLanguage?.Language]);
+
   return (
     <Loading loading={isLoadingOptions} size="small">
       <div className="selector-grid">
@@ -109,7 +117,7 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
           value={language}
           prefixIcon={<>语言:</>}
           disabled={isLanguageDisabled}
-          options={editionAndLanguage?.Language}
+          options={languageOptions}
           placeholder={isLanguageDisabled ? '请先选择版本号' : '选择语言'}
           clearable
           onChange={handleLanguageChange}

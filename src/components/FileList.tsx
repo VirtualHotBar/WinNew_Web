@@ -7,10 +7,11 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { Link, List, Space } from 'tdesign-react';
 import { SearchFilter } from './SearchFilter';
 import { formatFileSize } from '../utils/format';
-import type { WinFileInfo } from '../types/api';
+import type { WinFileInfo, EditionAndLanguage } from '../types/api';
 
 interface FileListProps {
   files: WinFileInfo[];
+  editionAndLanguage?: EditionAndLanguage;
   emptyContent?: React.ReactNode;
   enableSearch?: boolean;
   onDownload: (url: string) => void;
@@ -22,6 +23,7 @@ interface FileListProps {
  */
 export const FileList: React.FC<FileListProps> = ({
   files,
+  editionAndLanguage,
   emptyContent,
   enableSearch = true,
   onDownload,
@@ -41,6 +43,26 @@ export const FileList: React.FC<FileListProps> = ({
     setFilteredFiles(newFilteredFiles);
   }, []);
 
+  const languageLabelMap = useMemo(() => {
+    const map = new Map<string, string>();
+    (editionAndLanguage?.Language || []).forEach((item) => {
+      const display = item.label_cn || item.label;
+      map.set(item.value.toLowerCase(), display);
+      map.set(item.label.toLowerCase(), display);
+    });
+    return map;
+  }, [editionAndLanguage?.Language]);
+
+  const editionLabelMap = useMemo(() => {
+    const map = new Map<string, string>();
+    (editionAndLanguage?.Edition || []).forEach((item) => {
+      const display = item.label_cn || item.label;
+      map.set(item.value.toLowerCase(), display);
+      map.set(item.label.toLowerCase(), display);
+    });
+    return map;
+  }, [editionAndLanguage?.Edition]);
+
   const renderRows = useMemo(() => {
     return filteredFiles.map((info, index) => (
       <List.ListItem className="file-list-row" key={`${info.FileName}-${index}`}>
@@ -49,8 +71,8 @@ export const FileList: React.FC<FileListProps> = ({
             {`Windows ${info.SystemCode} ${info.VerCode} (${info.BuildVer})`}
           </div>
           <div className="file-list-meta">
-            <span>{info.Language}</span>
-            <span>{info.Edition}</span>
+            <span>{languageLabelMap.get((info.LanguageCode || info.Language).toLowerCase()) || info.Language}</span>
+            <span>{editionLabelMap.get(info.Edition.toLowerCase()) || info.Edition}</span>
             <span>{info.Architecture}</span>
             <span>{formatFileSize(info.Size)}</span>
             <span>SHA: {info.Sha256 || info.Sha1 || '-'}</span>
@@ -66,7 +88,7 @@ export const FileList: React.FC<FileListProps> = ({
         </Space>
       </List.ListItem>
     ));
-  }, [filteredFiles, onCopy, onDownload]);
+  }, [editionLabelMap, filteredFiles, languageLabelMap, onCopy, onDownload]);
 
   if (files.length === 0) {
     return <div className="file-empty">{emptyContent}</div>;

@@ -32,7 +32,7 @@ export const FileCard: React.FC<FileCardProps> = ({
   const editionValue = editionLabel || info.Edition || '-';
   const isConsumerEdition =
     editionValue === '消费者版' || info.Edition.toLowerCase() === 'consumer';
-  const editionTooltipContent = '含家庭 / 专业 / 教育等全套';
+  const editionTooltipContent = '含家庭 / 专业 / 企业 / 教育等全套';
 
   const title = useMemo(() => {
     if (!showTitle) return undefined;

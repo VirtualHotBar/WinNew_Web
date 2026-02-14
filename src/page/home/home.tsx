@@ -264,6 +264,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
         ) : (
           <FileList
             files={filteredFiles}
+            editionAndLanguage={editionAndLanguage}
             emptyContent={<strong>{hasSelectedFilters ? '无结果' : '请选择筛选选项'}</strong>}
             onDownload={onDownload}
             onCopy={onCopy}
