@@ -41,7 +41,6 @@ interface UseWinNewDataReturn {
     systemCode: string,
     version: string,
     language: string,
-    edition: string,
     architecture: 'all' | 'x64' | 'x86' | 'arm64'
   ) => Promise<void>;
   handleDownload: (url: string) => void;
@@ -120,7 +119,6 @@ export function useWinNewData(): UseWinNewDataReturn {
       systemCode: string,
       version: string,
       language: string,
-      edition: string,
       architecture: 'all' | 'x64' | 'x86' | 'arm64'
     ) => {
       if (!systemCode || !version) {
@@ -133,7 +131,6 @@ export function useWinNewData(): UseWinNewDataReturn {
           systemCode,
           version,
           language,
-          edition,
           architecture
         );
         setEditionAndLanguage(data);
@@ -158,8 +155,8 @@ export function useWinNewData(): UseWinNewDataReturn {
     }) => {
       const { systemCode, version, language, edition, architecture } = params;
 
-      // 如果参数不完整，清空结果
-      if (!systemCode || !version || !language || !edition || !architecture) {
+      // 查询必须包含系统 + 版本 + 语言
+      if (!systemCode || !version || !language) {
         setFilteredFiles([]);
         return;
       }

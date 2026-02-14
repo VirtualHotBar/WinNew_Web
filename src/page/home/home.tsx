@@ -116,7 +116,6 @@ interface AllSystemSectionProps {
     systemCode: string,
     version: string,
     language: string,
-    edition: string,
     architecture: 'all' | 'x64' | 'x86' | 'arm64'
   ) => Promise<void>;
   onFilterChange: (filters: FilterState) => void;
@@ -151,11 +150,10 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
         filters.systemCode,
         filters.version,
         filters.language,
-        filters.edition,
         filters.architecture
       );
     }
-  }, [filters, onLoadEditionAndLanguage]);
+  }, [filters.systemCode, filters.version, filters.language, filters.architecture, onLoadEditionAndLanguage]);
 
   useEffect(() => {
     if (!editionAndLanguage) return;
@@ -209,6 +207,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
     setFilters((prev) => ({
       ...prev,
       language: value,
+      edition: '',
     }));
   }, []);
 
@@ -230,43 +229,39 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
   return (
     <section className="panel section-panel">
       <h2 className="section-title">所有</h2>
-      <div className="all-system-layout">
-        <div className="all-system-left">
-          <h3 className="all-system-subtitle">筛选选项</h3>
-          <SystemSelector
-            versionsOption={versionsOption}
-            editionAndLanguage={editionAndLanguage}
-            isLoadingOptions={isLoadingOptions}
-            systemCode={filters.systemCode}
-            version={filters.version}
-            language={filters.language}
-            edition={filters.edition}
-            architecture={filters.architecture}
-            onSystemCodeChange={handleSystemCodeChange}
-            onVersionChange={handleVersionChange}
-            onLanguageChange={handleLanguageChange}
-            onEditionChange={handleEditionChange}
-            onArchitectureChange={handleArchitectureChange}
-          />
-        </div>
+      <div className="all-system-filter panel-lite">
+        <h3 className="all-system-subtitle">筛选选项</h3>
+        <SystemSelector
+          versionsOption={versionsOption}
+          editionAndLanguage={editionAndLanguage}
+          isLoadingOptions={isLoadingOptions}
+          systemCode={filters.systemCode}
+          version={filters.version}
+          language={filters.language}
+          edition={filters.edition}
+          architecture={filters.architecture}
+          onSystemCodeChange={handleSystemCodeChange}
+          onVersionChange={handleVersionChange}
+          onLanguageChange={handleLanguageChange}
+          onEditionChange={handleEditionChange}
+          onArchitectureChange={handleArchitectureChange}
+        />
+      </div>
 
-        <div className="all-system-right files-area">
-          <h3 className="all-system-subtitle">查询结果</h3>
-          {isLoading ? (
-            <Space direction="vertical" style={{ width: '100%' }}>
-              <SkeletonCard />
-            </Space>
-          ) : (
-            <FileList
-              files={filteredFiles}
-              editionAndLanguage={editionAndLanguage}
-              selectedLanguage={filters.language}
-              emptyContent={<strong>请选择筛选选项</strong>}
-              onDownload={onDownload}
-              onCopy={onCopy}
-            />
-          )}
-        </div>
+      <div className="all-system-results panel-lite files-area">
+        <h3 className="all-system-subtitle">查询结果</h3>
+        {isLoading ? (
+          <Space direction="vertical" style={{ width: '100%' }}>
+            <SkeletonCard />
+          </Space>
+        ) : (
+          <FileList
+            files={filteredFiles}
+            emptyContent={<strong>请选择筛选选项</strong>}
+            onDownload={onDownload}
+            onCopy={onCopy}
+          />
+        )}
       </div>
     </section>
   );

@@ -4,14 +4,13 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { FileCard } from './FileCard';
+import { Button, Space } from 'tdesign-react';
 import { SearchFilter } from './SearchFilter';
-import type { WinFileInfo, EditionAndLanguage } from '../types/api';
+import { formatFileSize } from '../utils/format';
+import type { WinFileInfo } from '../types/api';
 
 interface FileListProps {
   files: WinFileInfo[];
-  editionAndLanguage?: EditionAndLanguage;
-  selectedLanguage?: string;
   emptyContent?: React.ReactNode;
   enableSearch?: boolean;
   onDownload: (url: string) => void;
@@ -23,18 +22,22 @@ interface FileListProps {
  */
 export const FileList: React.FC<FileListProps> = ({
   files,
-  editionAndLanguage,
-  selectedLanguage,
   emptyContent,
   enableSearch = true,
   onDownload,
   onCopy,
 }) => {
   const [filteredFiles, setFilteredFiles] = useState<WinFileInfo[]>(files);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const ROW_HEIGHT = 86;
+  const CONTAINER_HEIGHT = 520;
+  const OVERSCAN = 6;
 
   // 当外部 files 变化时更新过滤列表
   React.useEffect(() => {
     setFilteredFiles(files);
+    setScrollTop(0);
   }, [files]);
 
   /**
@@ -44,32 +47,72 @@ export const FileList: React.FC<FileListProps> = ({
     setFilteredFiles(newFilteredFiles);
   }, []);
 
-  /**
-   * 渲染文件卡片
-   */
-  const renderFileCards = useMemo(() => {
-    return filteredFiles.map((info, index) => {
-      // 查找版本和语言的显示标签
-      const editionLabel = editionAndLanguage?.Edition.find(
-        (item) => item.value === info.Edition
-      )?.label_cn;
+  const visibleRange = useMemo(() => {
+    const start = Math.max(0, Math.floor(scrollTop / ROW_HEIGHT) - OVERSCAN);
+    const visibleCount = Math.ceil(CONTAINER_HEIGHT / ROW_HEIGHT) + OVERSCAN * 2;
+    const end = Math.min(filteredFiles.length, start + visibleCount);
+    return { start, end };
+  }, [filteredFiles.length, scrollTop]);
 
-      const languageLabel = selectedLanguage
-        ? editionAndLanguage?.Language.find((item) => item.value === selectedLanguage)?.label_cn
-        : info.Language;
-
+  const visibleRows = useMemo(() => {
+    return filteredFiles.slice(visibleRange.start, visibleRange.end).map((info, offset) => {
+      const index = visibleRange.start + offset;
+      const top = index * ROW_HEIGHT;
       return (
-        <FileCard
-          key={`${info.FileName}-${index}`}
-          info={info}
-          editionLabel={editionLabel}
-          languageLabel={languageLabel}
-          onDownload={onDownload}
-          onCopy={onCopy}
-        />
+        <div className="file-list-row file-list-row-virtual" style={{ top }} key={`${info.FileName}-${index}`}>
+          <div className="file-list-main">
+            <div className="file-list-name">{info.FileName}</div>
+            <div className="file-list-meta">
+              <span>{info.VerCode} ({info.BuildVer})</span>
+              <span>{info.Language}</span>
+              <span>{info.Edition}</span>
+              <span>{info.Architecture}</span>
+              <span>{formatFileSize(info.Size)}</span>
+            </div>
+          </div>
+          <Space className="file-list-actions" size="small">
+            <Button theme="primary" size="small" onClick={() => onDownload(info.FilePath)}>
+              下载
+            </Button>
+            <Button variant="outline" size="small" onClick={() => onCopy(info.FilePath)}>
+              复制直链
+            </Button>
+          </Space>
+        </div>
       );
     });
-  }, [filteredFiles, editionAndLanguage, selectedLanguage, onDownload, onCopy]);
+  }, [filteredFiles, onCopy, onDownload, visibleRange]);
+
+  const totalHeight = filteredFiles.length * ROW_HEIGHT;
+
+  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+    setScrollTop(event.currentTarget.scrollTop);
+  }, []);
+
+  const renderRows = useMemo(() => {
+    return filteredFiles.map((info, index) => (
+      <div className="file-list-row" key={`${info.FileName}-${index}`}>
+        <div className="file-list-main">
+          <div className="file-list-name">{info.FileName}</div>
+          <div className="file-list-meta">
+            <span>{info.VerCode} ({info.BuildVer})</span>
+            <span>{info.Language}</span>
+            <span>{info.Edition}</span>
+            <span>{info.Architecture}</span>
+            <span>{formatFileSize(info.Size)}</span>
+          </div>
+        </div>
+        <Space className="file-list-actions" size="small">
+          <Button theme="primary" size="small" onClick={() => onDownload(info.FilePath)}>
+            下载
+          </Button>
+          <Button variant="outline" size="small" onClick={() => onCopy(info.FilePath)}>
+            复制直链
+          </Button>
+        </Space>
+      </div>
+    ));
+  }, [filteredFiles, onCopy, onDownload]);
 
   if (files.length === 0) {
     return <>{emptyContent}</>;
@@ -89,7 +132,15 @@ export const FileList: React.FC<FileListProps> = ({
           没有找到匹配的文件
         </div>
       ) : (
-        renderFileCards
+        filteredFiles.length <= 30 ? (
+          <div className="file-list-wrap">{renderRows}</div>
+        ) : (
+          <div className="file-list-virtual" style={{ height: CONTAINER_HEIGHT }} onScroll={handleScroll}>
+            <div className="file-list-virtual-inner" style={{ height: totalHeight }}>
+              {visibleRows}
+            </div>
+          </div>
+        )
       )}
     </div>
   );

@@ -170,7 +170,6 @@ export async function fetchEditionAndLanguageOptions(
   systemCode: string,
   version: string,
   languageCode: string,
-  edition: string,
   architecture: string,
   signal?: AbortSignal
 ): Promise<EditionAndLanguage> {
@@ -197,7 +196,6 @@ export async function fetchEditionAndLanguageOptions(
         `${API_BASE}${ENDPOINTS.GET_LANGUAGE_OPTIONS}${buildQueryString({
           SystemCode: systemCode,
           Version: version,
-          Edition: edition,
           Architecture: architecture,
         })}`,
         { signal: finalSignal }

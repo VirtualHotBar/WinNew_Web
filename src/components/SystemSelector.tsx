@@ -51,7 +51,7 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
   // 计算禁用状态
   const isVersionDisabled = !systemCode;
   const isLanguageDisabled = !editionAndLanguage?.Language.length || !version;
-  const isEditionDisabled = !editionAndLanguage?.Edition.length || !version;
+  const isEditionDisabled = !language || !editionAndLanguage?.Edition.length || !version;
 
   // 处理系统代码变化
   const handleSystemCodeChange = useCallback((value: unknown) => {
@@ -119,7 +119,7 @@ export const SystemSelector: React.FC<SystemSelectorProps> = ({
           prefixIcon={<>版本:</>}
           disabled={isEditionDisabled}
           options={editionAndLanguage?.Edition}
-          placeholder={isEditionDisabled ? '请先选择版本号' : '选择版本'}
+          placeholder={isEditionDisabled ? '请先选择语言' : '选择版本'}
           clearable
           onChange={handleEditionChange}
         />
