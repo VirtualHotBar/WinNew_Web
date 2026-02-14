@@ -115,28 +115,30 @@ function AppLayout() {
             className="main-menu"
           >
             <div className="menu-spacer" />
-            <div className="theme-mode-control">
-              <Tooltip
-                content={`当前：${THEME_MODE_LABEL[themeMode]}（点击切换）`}
-                placement="bottom"
-                showArrow
-              >
-                <TLink
-                  className="theme-mode-link"
-                  theme="default"
-                  hover="color"
-                  underline={false}
-                  onClick={handleThemeModeToggle}
-                >
-                  {THEME_MODE_ICON[themeMode]}
-                </TLink>
-              </Tooltip>
-            </div>
             {routers.map((item) => (
               <MenuItem key={item.path} value={item.path}>
                 <RouterLink to={item.path}>{item.word}</RouterLink>
               </MenuItem>
             ))}
+            <MenuItem key="theme-mode" value="theme-mode" className="theme-mode-menu-item">
+              <div className="theme-mode-control">
+                <Tooltip
+                  content={`当前：${THEME_MODE_LABEL[themeMode]}（点击切换）`}
+                  placement="bottom"
+                  showArrow
+                >
+                  <TLink
+                    className="theme-mode-link"
+                    theme="default"
+                    hover="color"
+                    underline={false}
+                    onClick={handleThemeModeToggle}
+                  >
+                    {THEME_MODE_ICON[themeMode]}
+                  </TLink>
+                </Tooltip>
+              </div>
+            </MenuItem>
           </HeadMenu>
         </div>
       </Header>

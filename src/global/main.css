@@ -29,9 +29,9 @@
   --app-surface: #1b1b1b;
   --app-text: #f1f1f1;
   --app-text-muted: #acacac;
-  --app-primary: #f59e0b;
-  --app-primary-hover: #fbbf24;
-  --app-primary-soft: #3a2a12;
+  --app-primary: #0f6adf;
+  --app-primary-hover: #0d5bc0;
+  --app-primary-soft: #eaf3ff;
   --app-border: #353535;
   --app-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
   --app-bg-grad-start: #1a1a1a;
@@ -113,8 +113,8 @@ p {
 }
 
 .theme-mode-control {
-  width: 40px;
-  margin-right: 10px;
+  width: 28px;
+  margin: 0;
 }
 
 .theme-mode-link {
@@ -132,6 +132,15 @@ p {
 .theme-mode-link:hover {
   background: var(--app-primary-soft);
   color: var(--app-primary);
+}
+
+.main-menu .theme-mode-menu-item {
+  min-width: auto !important;
+  padding: 0 !important;
+}
+
+.main-menu .theme-mode-menu-item .t-menu__content {
+  padding: 0 !important;
 }
 
 .brand-logo {
@@ -478,9 +487,17 @@ a.file-card-title-edition .t-link__suffix-icon {
   background: var(--app-primary-soft);
 }
 
+[theme-mode='dark'] .donation-table thead {
+  background: var(--app-surface);
+}
+
 .donation-table img {
   width: min(240px, 100%);
   border-radius: 10px;
+}
+
+[theme-mode='dark'] .donation-table img {
+  filter: invert(1);
 }
 
 @media (max-width: 992px) {
