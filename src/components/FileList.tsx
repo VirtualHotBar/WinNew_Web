@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { Button, Space } from 'tdesign-react';
+import { Link, List, Space } from 'tdesign-react';
 import { SearchFilter } from './SearchFilter';
 import { formatFileSize } from '../utils/format';
 import type { WinFileInfo } from '../types/api';
@@ -59,26 +59,26 @@ export const FileList: React.FC<FileListProps> = ({
       const index = visibleRange.start + offset;
       const top = index * ROW_HEIGHT;
       return (
-        <div className="file-list-row file-list-row-virtual" style={{ top }} key={`${info.FileName}-${index}`}>
+        <List.ListItem className="file-list-row file-list-row-virtual" style={{ top }} key={`${info.FileName}-${index}`}>
           <div className="file-list-main">
-            <div className="file-list-name">{info.FileName}</div>
             <div className="file-list-meta">
               <span>{info.VerCode} ({info.BuildVer})</span>
               <span>{info.Language}</span>
               <span>{info.Edition}</span>
               <span>{info.Architecture}</span>
               <span>{formatFileSize(info.Size)}</span>
+              <span>SHA: {info.Sha256 || info.Sha1 || '-'}</span>
             </div>
           </div>
           <Space className="file-list-actions" size="small">
-            <Button theme="primary" size="small" onClick={() => onDownload(info.FilePath)}>
+            <Link theme="primary" hover="color" onClick={() => onDownload(info.FilePath)}>
               下载
-            </Button>
-            <Button variant="outline" size="small" onClick={() => onCopy(info.FilePath)}>
+            </Link>
+            <Link theme="default" hover="color" onClick={() => onCopy(info.FilePath)}>
               复制直链
-            </Button>
+            </Link>
           </Space>
-        </div>
+        </List.ListItem>
       );
     });
   }, [filteredFiles, onCopy, onDownload, visibleRange]);
@@ -91,26 +91,26 @@ export const FileList: React.FC<FileListProps> = ({
 
   const renderRows = useMemo(() => {
     return filteredFiles.map((info, index) => (
-      <div className="file-list-row" key={`${info.FileName}-${index}`}>
+      <List.ListItem className="file-list-row" key={`${info.FileName}-${index}`}>
         <div className="file-list-main">
-          <div className="file-list-name">{info.FileName}</div>
           <div className="file-list-meta">
             <span>{info.VerCode} ({info.BuildVer})</span>
             <span>{info.Language}</span>
             <span>{info.Edition}</span>
             <span>{info.Architecture}</span>
             <span>{formatFileSize(info.Size)}</span>
+            <span>SHA: {info.Sha256 || info.Sha1 || '-'}</span>
           </div>
         </div>
         <Space className="file-list-actions" size="small">
-          <Button theme="primary" size="small" onClick={() => onDownload(info.FilePath)}>
+          <Link theme="primary" hover="color" onClick={() => onDownload(info.FilePath)}>
             下载
-          </Button>
-          <Button variant="outline" size="small" onClick={() => onCopy(info.FilePath)}>
+          </Link>
+          <Link theme="default" hover="color" onClick={() => onCopy(info.FilePath)}>
             复制直链
-          </Button>
+          </Link>
         </Space>
-      </div>
+      </List.ListItem>
     ));
   }, [filteredFiles, onCopy, onDownload]);
 
@@ -124,7 +124,7 @@ export const FileList: React.FC<FileListProps> = ({
         <SearchFilter
           files={files}
           onFilterChange={handleFilterChange}
-          placeholder="搜索文件名、版本号、内部版本或SHA1/SHA256..."
+          placeholder="搜索版本号、内部版本或SHA1/SHA256..."
         />
       )}
       {filteredFiles.length === 0 ? (
@@ -133,12 +133,12 @@ export const FileList: React.FC<FileListProps> = ({
         </div>
       ) : (
         filteredFiles.length <= 30 ? (
-          <div className="file-list-wrap">{renderRows}</div>
+          <List className="file-list-wrap">{renderRows}</List>
         ) : (
           <div className="file-list-virtual" style={{ height: CONTAINER_HEIGHT }} onScroll={handleScroll}>
-            <div className="file-list-virtual-inner" style={{ height: totalHeight }}>
+            <List className="file-list-virtual-inner" style={{ height: totalHeight }}>
               {visibleRows}
-            </div>
+            </List>
           </div>
         )
       )}
