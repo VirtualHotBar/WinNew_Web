@@ -226,12 +226,7 @@ const AllSystemSection: React.FC<AllSystemSectionProps> = ({
     }));
   }, []);
 
-  const hasSelectedFilters =
-    Boolean(filters.systemCode) ||
-    Boolean(filters.version) ||
-    Boolean(filters.language) ||
-    Boolean(filters.edition) ||
-    filters.architecture !== 'all';
+  const hasSelectedFilters = Boolean(filters.language);
 
   return (
     <section className="panel section-panel">
