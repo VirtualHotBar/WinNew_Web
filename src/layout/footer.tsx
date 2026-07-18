@@ -34,10 +34,10 @@ export const FooterContent: React.FC = () => {
       </div>
 
       <div className="tokeness-sponsor" style={{ marginTop: '8px' }}>
-        <a href="https://tokeness.io/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '6px' }}>
+        <a href="https://tokeness.io/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '6px' ,marginTop:'-3px'}}>
           <img src="https://tokeness.io/_static/logo.svg" alt="Tokeness.io logo" width="20" height="20" loading="eager" style={{ display: 'block' }} />
         </a>
-        <span>本项目的AI Tokens 由 <a href="https://tokeness.io/" target="_blank" className="class-link" rel="noopener noreferrer">Tokeness.io</a> 赞助提供</span>
+        <span>本项目的 AI Tokens 由 <a href="https://tokeness.io/" target="_blank" className="class-link" rel="noopener noreferrer">Tokeness.io</a> 赞助提供</span>
       </div>
     </div>
   );
